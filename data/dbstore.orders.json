@@ -1,0 +1,106 @@
+[{
+  "_id": {
+    "$oid": "64a8358f23ed533fe09e053f"
+  },
+  "user": {
+    "$oid": "64a7a18eb180fb13f2859d8e"
+  },
+  "products": [
+    {
+      "product": {
+        "$oid": "64a78ca1b180fb13f2859b9d"
+      },
+      "quantity": 1,
+      "price": 7890000,
+      "_id": {
+        "$oid": "64a8358f23ed533fe09e0540"
+      }
+    },
+    {
+      "product": {
+        "$oid": "64a7889ab180fb13f2859b7b"
+      },
+      "quantity": 2,
+      "price": 8090000,
+      "_id": {
+        "$oid": "64a8358f23ed533fe09e0541"
+      }
+    }
+  ],
+  "orderTotal": 24070000,
+  "address": "61 đ77 Tân Quy Q7 TP HCM",
+  "billing": "cod",
+  "status": "pending",
+  "description": "không",
+  "createdAt": {
+    "$date": "2023-07-07T15:55:59.396Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-07T15:55:59.396Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64aa559def89433cc69a4053"
+  },
+  "user": {
+    "$oid": "64a7a18eb180fb13f2859d8e"
+  },
+  "products": [
+    {
+      "product": {
+        "$oid": "64a78c04b180fb13f2859b97"
+      },
+      "quantity": 1,
+      "price": 9690000,
+      "_id": {
+        "$oid": "64aa559def89433cc69a4054"
+      }
+    }
+  ],
+  "orderTotal": 9690000,
+  "address": "61 đ77 Tân Quy Q7 TP HCM",
+  "billing": "cod",
+  "status": "pending",
+  "description": "aa",
+  "createdAt": {
+    "$date": "2023-07-09T06:37:17.488Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-09T06:37:17.488Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64aa55a9ef89433cc69a406a"
+  },
+  "user": {
+    "$oid": "64a7a18eb180fb13f2859d8e"
+  },
+  "products": [
+    {
+      "product": {
+        "$oid": "64a7889ab180fb13f2859b7b"
+      },
+      "quantity": 1,
+      "price": 8090000,
+      "_id": {
+        "$oid": "64aa55a9ef89433cc69a406b"
+      }
+    }
+  ],
+  "orderTotal": 8090000,
+  "address": "61 đ77 Tân Quy Q7 TP HCM",
+  "billing": "cod",
+  "status": "pending",
+  "description": "â",
+  "createdAt": {
+    "$date": "2023-07-09T06:37:29.718Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-09T06:37:29.718Z"
+  },
+  "__v": 0
+}]

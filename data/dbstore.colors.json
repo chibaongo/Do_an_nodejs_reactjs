@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "64a6a226acf5748715605d7a"
+  },
+  "name": "Đen",
+  "description": "#000000",
+  "image": "http://localhost:3100/uploads\\1688642086475-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-06T11:14:46.493Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-06T11:14:46.493Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64a6a24cacf5748715605d7e"
+  },
+  "name": "Đỏ",
+  "description": "#ff2000",
+  "image": "http://localhost:3100/uploads\\1688642124246-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-06T11:15:24.272Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-06T11:15:24.272Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64a780c7b180fb13f2859af6"
+  },
+  "name": "Xanh",
+  "description": "#036bfd",
+  "image": "http://localhost:3100/uploads\\1688699079734-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-07T03:04:39.752Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-07T03:04:39.752Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64a780d8b180fb13f2859afa"
+  },
+  "name": "Vàng",
+  "description": "#ffe500",
+  "image": "http://localhost:3100/uploads\\1688699096584-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-07T03:04:56.600Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-07T03:04:56.600Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64a780e8b180fb13f2859afe"
+  },
+  "name": "Xám",
+  "description": "#9d9d9d",
+  "image": "http://localhost:3100/uploads\\1688699112334-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-07T03:05:12.349Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-07T03:05:12.349Z"
+  },
+  "__v": 0
+}]

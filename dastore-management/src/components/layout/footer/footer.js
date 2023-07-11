@@ -9,7 +9,7 @@ function _Footer(){
         <Footer style={{
             marginLeft: 230,
             textAlign: 'center'}}>
-            Copyright@ 2023 Created by team DASTORE
+            Copyright@ 2023 Created by team Chí Bảo - Quyết Chiến
         </Footer>
     );
 }

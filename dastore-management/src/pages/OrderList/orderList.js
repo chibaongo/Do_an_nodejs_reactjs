@@ -38,38 +38,6 @@ const OrderList = () => {
         setOpenModalCreate(true);
     };
 
-    const handleOkUser = async (values) => {
-        setLoading(true);
-        try {
-            const categoryList = {
-                "name": values.name,
-                "description": values.description,
-                "slug": values.slug
-            }
-            await axiosClient.post("/category", categoryList).then(response => {
-                if (response === undefined) {
-                    notification["error"]({
-                        message: `Thông báo`,
-                        description:
-                            'Tạo danh mục thất bại',
-                    });
-                }
-                else {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'Tạo danh mục thành công',
-                    });
-                    setOpenModalCreate(false);
-                    handleCategoryList();
-                }
-            })
-            setLoading(false);
-
-        } catch (error) {
-            throw error;
-        }
-    }
 
     const handleUpdateOrder = async (values) => {
         console.log(values);
@@ -317,6 +285,7 @@ const OrderList = () => {
             }
         })();
     }, [])
+
     return (
         <div>
             <Spin spinning={loading}>
@@ -366,79 +335,6 @@ const OrderList = () => {
                     </div>
                 </div>
 
-                <Modal
-                    title="Tạo danh mục mới"
-                    visible={openModalCreate}
-                    style={{ top: 100 }}
-                    onOk={() => {
-                        form
-                            .validateFields()
-                            .then((values) => {
-                                form.resetFields();
-                                handleOkUser(values);
-                            })
-                            .catch((info) => {
-                                console.log('Validate Failed:', info);
-                            });
-                    }}
-                    onCancel={() => handleCancel("create")}
-                    okText="Hoàn thành"
-                    cancelText="Hủy"
-                    width={600}
-                >
-                    <Form
-                        form={form}
-                        name="eventCreate"
-                        layout="vertical"
-                        initialValues={{
-                            residence: ['zhejiang', 'hangzhou', 'xihu'],
-                            prefix: '86',
-                        }}
-                        scrollToFirstError
-                    >
-                        <Form.Item
-                            name="name"
-                            label="Tên"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your sender name!',
-                                },
-                            ]}
-                            style={{ marginBottom: 10 }}
-                        >
-                            <Input placeholder="Tên" />
-                        </Form.Item>
-                        <Form.Item
-                            name="description"
-                            label="Mô tả"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your subject!',
-                                },
-                            ]}
-                            style={{ marginBottom: 10 }}
-                        >
-                            <Input placeholder="Mô tả" />
-                        </Form.Item>
-
-                        <Form.Item
-                            name="slug"
-                            label="Slug"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your content!',
-                                },
-                            ]}
-                            style={{ marginBottom: 10 }}
-                        >
-                            <Input placeholder="Slug" />
-                        </Form.Item>
-
-                    </Form>
-                </Modal>
 
                 <Modal
                     title="Cập nhật đơn hàng"

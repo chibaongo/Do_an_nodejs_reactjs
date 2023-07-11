@@ -97,6 +97,9 @@ const RouterURL = withRouter(({ location }) => {
                     <Route exact path="/news/:id">
                         <NewsDetail />
                     </Route> 
+                    <Route exact path="/product-list/:id">
+                        <ProductList />
+                    </Route> 
                     <Layout>
                         <Footer />
                     </Layout>
@@ -164,7 +167,7 @@ const RouterURL = withRouter(({ location }) => {
                         <PrivateContainer />
                     </Route>
                     <Route exact path="/product-list/:id">
-                        <PrivateContainer />
+                        <PublicContainer />
                     </Route>
                     <Route exact path="/news">
                         <PublicContainer />

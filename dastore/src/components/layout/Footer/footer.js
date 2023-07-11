@@ -13,9 +13,9 @@ function _Footer() {
             <Row className="footer-desktop">
                 <Col span={3} className="footer">
                     <strong style={{ color: "#FFFFFF", fontSize: 20, cursor: "pointer" }}>Tổng đài hỗ trợ</strong>
-                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Gọi mua hàng 1800.2097</p>
-                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Gọi khiếu nại 1800.2063</p>
-                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Gọi bảo hành 1800.2064</p>
+                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Gọi mua hàng 1900 0000</p>
+                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Gọi khiếu nại 1900 0000</p>
+                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Gọi bảo hành 1900 0000</p>
                 </Col>
                 <Col span={4} className="footer">
                     <strong style={{ color: "#FFFFFF", fontSize: 20, cursor: "pointer" }}>Thông tin và chính sách</strong>
@@ -32,24 +32,22 @@ function _Footer() {
                 </Col>
                 <Col span={5} className="footer">
                     <strong style={{ color: "#FFFFFF", fontSize: 20, cursor: "pointer" }}>Địa chỉ</strong>
-                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Chi nhánh 1: 94E-94F Đường Láng, Phường Ngã Tư Sở, Quận Đống Đa, Hà Nội</p>
-                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Chi nhánh 2: 94E-94F Đường Láng, Phường Ngã Tư Sở, Quận Đống Đa, Hà Nội</p>
+                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Chi nhánh 1: 61, Đường 77, phường Tân Quy, Quận 7, TP HMC</p>
+                    <p style={{ marginTop: 20, color: "#FFFFFF", fontWeight: 400, fontSize: 14, cursor: "pointer" }}>Chi nhánh 2: 142/36/3, Nguyễn Thị Thập, phường Bình Thuận, Quận 7, TP HCM</p>
 
                 </Col>
                 <Col span={4}>
                     <strong style={{ color: "#FFFFFF", fontSize: 20, marginBottom: 40, cursor: "pointer" }}>Kết nối với chúng tôi</strong>
                     <Row style={{ marginTop: 15 }}>
                         <Col span={6}>
-                            <SocialIcon url="https://www.youtube.com/@CellphoneSOfficial" style={{ height: 35, width: 35, cursor: "pointer" }} />
+                            <SocialIcon url="https://www.youtube.com/channel/UCmtdk_xqvbtd_-sZrMNb9hw" style={{ height: 35, width: 35, cursor: "pointer" }} />
                         </Col>
                         <Col span={6}>
-                            <SocialIcon url="https://www.facebook.com/CellphoneSVietnam" style={{ height: 35, width: 35, cursor: "pointer" }} />
+                            <SocialIcon url="https://www.facebook.com/ngo.bao.5496" style={{ height: 35, width: 35, cursor: "pointer" }} />
                         </Col>
+                       
                         <Col span={6}>
-                            <SocialIcon url="https://www.instagram.com/cellphonesvn/" style={{ height: 35, width: 35, cursor: "pointer" }} />
-                        </Col>
-                        <Col span={6}>
-                            <SocialIcon url="https://www.tiktok.com/@cellphones.official" style={{ height: 35, width: 35, cursor: "pointer" }} />
+                            <SocialIcon url="https://www.tiktok.com/@baongo412?lang=vi-VN" style={{ height: 35, width: 35, cursor: "pointer" }} />
                         </Col>
                     </Row>
 
@@ -88,8 +86,8 @@ function _Footer() {
             </div>
             <div style={{ textAlign: 'center' }}>
                 <Divider style={{ padding: 0 }} />
-                <p style={{ color: "#FFFFFF", fontSize: 13 }}>Copyright@ 2023 Created by team DaStore</p>
-                <p style={{ color: "#FFFFFF", fontSize: 13 }}>Điện thoại: (+84) 000.0000000 - (+84) 000.0000000</p>
+                <p style={{ color: "#FFFFFF", fontSize: 13 }}>Copyright@ 2023 Created by team Chí Bảo - Quyết Chiến</p>
+                <p style={{ color: "#FFFFFF", fontSize: 13 }}>Điện thoại: (+84) 0826224670 - (+84) 0353056921</p>
             </div>
         </Footer>
     );

@@ -423,9 +423,9 @@ const ProductDetail = () => {
                                         </div>
                                         <div class="box-content-promotion">
                                             <p class="box-product-promotion-number"></p>
-                                            {/* <a >Thu cũ lên đời - Giá thu cao nhất - Tặng thêm 1 triệu khi lên đời
-                                                <span>(Xem chi tiết)</span>
-                                            </a> */}
+                                            <a >Hiện đang có nhiều chương trình khuyến mãi đang đợi bạn !
+                                                {/* <span>(Xem chi tiết)</span> */}
+                                            </a>
                                         </div>
                                     </div>
                                     {/* <div className="color-product">
@@ -480,14 +480,14 @@ const ProductDetail = () => {
                                                             </div>
                                                             <p>
                                                                 Bảo hành <b>chính hãng 1 năm</b> tại các trung tâm bảo hành hãng
-                                                                <a href="/bao-hanh/lenovo" target="_blank" title="Chính sách bảo hành">
+                                                                <a href="#" >
                                                                     Xem địa chỉ bảo hành
                                                                 </a>
 
                                                             </p>
                                                         </li>
 
-                                                        <li><div class="iconl"><i class="icondetail-sachhd"></i></div><p>Bộ sản phẩm gồm: Dây nguồn, Sách hướng dẫn, Thùng máy, Sạc {productDetail.name} <a href="#" >Xem hình</a></p></li>
+                                                        <li><div class="iconl"><i class="icondetail-sachhd"></i></div><p>Sản phẩm gồm: {productDetail.name} <a href="#" >Xem hình</a></p></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -497,8 +497,18 @@ const ProductDetail = () => {
                                 </Card>
                             </Col>
                         </Row>
-
-
+{/* thông số */}
+                        <div>
+                            <Descriptions title="Thông số kỹ thuật" bordered>
+                                <Descriptions.Item label="Suồn Xe">{productDetail.suonXe}</Descriptions.Item>
+                                <Descriptions.Item label="Loại Phanh Thắng">{productDetail.loaiPhanhThang}</Descriptions.Item>
+                                <Descriptions.Item label="Bộ Líp">{productDetail.boLip}</Descriptions.Item>
+                                <Descriptions.Item label="Bộ Đĩa">{productDetail.boDia}</Descriptions.Item>
+                                <Descriptions.Item label="Loại Tay Đề">{productDetail.loaiTayDe}</Descriptions.Item>
+                                <Descriptions.Item label="Phuộc">{productDetail.phuoc}</Descriptions.Item>
+                                <Descriptions.Item label="Tải Trọng">{productDetail.taiTrong}</Descriptions.Item>
+                            </Descriptions>
+                        </div>
 
                         <div>
                             <div className='box_detail_description' dangerouslySetInnerHTML={{ __html: productDetail.description }}></div>
@@ -639,17 +649,7 @@ const ProductDetail = () => {
                             </Col>
                         </Row>
                         <div></div>
-                        <div>
-                            <Descriptions title="Thông số kỹ thuật" bordered>
-                                <Descriptions.Item label="Suồn Xe">{productDetail.suonXe}</Descriptions.Item>
-                                <Descriptions.Item label="Loại Phanh Thắng">{productDetail.loaiPhanhThang}</Descriptions.Item>
-                                <Descriptions.Item label="Bộ Líp">{productDetail.boLip}</Descriptions.Item>
-                                <Descriptions.Item label="Bộ Đĩa">{productDetail.boDia}</Descriptions.Item>
-                                <Descriptions.Item label="Loại Tay Đề">{productDetail.loaiTayDe}</Descriptions.Item>
-                                <Descriptions.Item label="Phuộc">{productDetail.phuoc}</Descriptions.Item>
-                                <Descriptions.Item label="Tải Trọng">{productDetail.taiTrong}</Descriptions.Item>
-                            </Descriptions>
-                        </div>
+                       
 
                         <div className="price" style={{ marginTop: 40 }}>
                             <h1 className="product_name">Sản phẩm bạn có thể quan tâm</h1>

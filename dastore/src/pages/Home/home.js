@@ -16,6 +16,7 @@ import service7 from "../../assets/image/service/service7.png";
 import service8 from "../../assets/image/service/service8.png";
 import service9 from "../../assets/image/service/service9.png";
 import service10 from "../../assets/image/service/service10.png";
+import banner3 from "../../assets/image/banner-3.png";
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import triangleTopRight from "../../assets/icon/Triangle-Top-Right.svg"
 
@@ -101,13 +102,13 @@ const Home = () => {
             }
             try {
                 const data = { limit: 10, page: 1 };
-                const response = await productApi.getProductsByCategory(data, "649d7380a463ba607d29f080");
+                const response = await productApi.getProductsByCategory(data, "64a6a17dacf5748715605d66");
                 console.log(response);
                 setProductsPhone(response.data.docs);
-                const response2 = await productApi.getProductsByCategory(data, "649d7380a463ba607d29f080");
+                const response2 = await productApi.getProductsByCategory(data, "64a6a17dacf5748715605d66");
                 console.log(response2);
                 setProductsPC(response2.data.docs);
-                const response3 = await productApi.getProductsByCategory(data, "649d7380a463ba607d29f080");
+                const response3 = await productApi.getProductsByCategory(data, "64a6a17dacf5748715605d66");
                 console.log(response3);
                 setProductsTablet(response3.data.docs);
             } catch (error) {
@@ -172,13 +173,13 @@ const Home = () => {
                     </Row>
                 </div >
 
-                <div className="container-home container">
+                {/* <div className="container-home container">
                     <img src={promotion1} className="promotion1"></img>
-                </div>
+                </div> */}
 
                 <div className="image-one" >
                     <div className="texty-demo">
-                        <Texty>Giờ Vàng</Texty>
+                        {/* <Texty>Giờ Vàng</Texty> */}
                     </div>
                     <div className="texty-title">
                         <p>Sản Phẩm <strong style={{ color: "#3b1d82" }}>Giảm Sốc</strong></p>
@@ -272,11 +273,11 @@ const Home = () => {
                 <div>
 
                 </div>
-                <div className="heading_slogan">
+                {/* <div className="heading_slogan">
                     <div>Tại sao</div>
                     <div>Nên chọn chúng tôi</div>
-                </div>
-                <div className="card_wrap container-home container">
+                </div> */}
+                {/* <div className="card_wrap container-home container">
                     <div>
                         <Card bordered={false} className="card_suggest card_why card_slogan">
                             <img src={service6}></img>
@@ -307,15 +308,15 @@ const Home = () => {
                             <p class="card-text mt-3 fw-bold text-center">Hỗ trợ <br /> Nhanh chóng</p>
                         </Card>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="image-one" >
-                    <div className="texty-demo">
+                    {/* <div className="texty-demo">
                         <Texty>Giờ Vàng</Texty>
                     </div>
                     <div className="texty-title">
                         <p>Sản Phẩm <strong style={{ color: "#3b1d82" }}>Giảm Sốc</strong></p>
-                    </div>
+                    </div> */}
 
                     <div className="list-products container" key="1">
                         <Row>
@@ -405,7 +406,7 @@ const Home = () => {
                     </div>
                 </div> */}
 
-                <div className="image-one" >
+                {/* <div className="image-one" >
                     <div className="texty-demo">
                         <Texty>Giờ Vàng</Texty>
                     </div>
@@ -477,16 +478,16 @@ const Home = () => {
                             ))}
                         </Row>
                     </div>
-                </div>
+                </div> */}
 
                 <div class="container">
                     <div class="ec-offer-inner ofr-img">
                         <div class="col-sm-6 ec-offer-content">
                             <div class="ec-offer-content-inner">
-                                <h2 class="ec-offer-stitle">Ngày Hội Giảm Giá</h2>
+                                {/* <h2 class="ec-offer-stitle">Ngày Hội Giảm Giá</h2>
                                 <h2 class="ec-offer-title">Lên đến 60%</h2>
                                 <span class="ec-offer-desc">Lựa chọn những sản phẩm yêu thích của bạn!</span>
-                                <span class="ec-offer-btn"><a href="#" class="btn btn-primary">Mua Ngay</a></span>
+                                <span class="ec-offer-btn"><a href="#" class="btn btn-primary">Mua Ngay</a></span> */}
                             </div>
                         </div>
                     </div>

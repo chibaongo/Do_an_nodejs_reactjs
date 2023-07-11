@@ -178,9 +178,13 @@ const Cart = () => {
 
     const handleDelete = async (productId) => {
         const updatedCart = JSON.parse(localStorage.getItem('cart'));
-        const filteredCart = updatedCart.filter((product) => product._id !== productId);
+        const filteredCart = updatedCart.filter((product) => product._id !==  productId);
         localStorage.setItem('cart', JSON.stringify(filteredCart));
+        const cartLength = filteredCart.length;
+        setCartLength(cartLength);
+        localStorage.setItem('cartLength',cartLength.toString());
         setProductDetail(filteredCart);
+        window.location.reload();
 
       };
 

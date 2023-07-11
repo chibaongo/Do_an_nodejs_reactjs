@@ -1,6 +1,5 @@
 const OrderModel = require('../models/order');
 const UserModel = require('../models/user');
-const { sendKafkaMessage } = require('../kafka/producer');
 const _const = require('../config/constant')
 const jwt = require('jsonwebtoken');
 

@@ -1,5 +1,4 @@
 import axiosClient from "./axiosClient";
-
 const userApi = {
     login(email, password) {
         const url = '/auth/login';

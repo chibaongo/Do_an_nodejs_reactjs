@@ -1,195 +1,71 @@
 import React, { useState, useEffect } from "react";
-import styles from "./cartHistory.css";
 import axiosClient from "../../../apis/axiosClient";
 import { useParams } from "react-router-dom";
-import eventApi from "../../../apis/eventApi";
 import productApi from "../../../apis/productApi";
-import { useHistory } from 'react-router-dom';
-import { Col, Row, Tag, Spin, Card } from "antd";
-import { DateTime } from "../../../utils/dateTime";
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { Typography, Button, Badge, Breadcrumb, Popconfirm, notification, Form, Input, Select, Rate, Table } from 'antd';
-import { HistoryOutlined, AuditOutlined, AppstoreAddOutlined, CloseOutlined, UserOutlined, MehOutlined, TeamOutlined, HomeOutlined, CheckOutlined } from '@ant-design/icons';
+import { Tag, Spin, Card } from "antd";
+import { Button, notification, Table } from 'antd';
 import moment from 'moment';
-
-import Slider from "react-slick";
-
-const { Meta } = Card;
-const { Option } = Select;
-
-const { Title } = Typography;
-const DATE_TIME_FORMAT = "DD/MM/YYYY HH:mm";
-const { TextArea } = Input;
+import { Modal } from 'antd';
+import orderApi from "../../../apis/orderApi"
 
 const CartHistory = () => {
 
     const [orderList, setOrderList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [suggest, setSuggest] = useState([]);
-    const [visible, setVisible] = useState(false);
-    const [dataForm, setDataForm] = useState([]);
-    const [lengthForm, setLengthForm] = useState();
-    const [form] = Form.useForm();
-    const [template_feedback, setTemplateFeedback] = useState();
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
+    const [total, setTotalList] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [order, setOrder] = useState([]);
     let { id } = useParams();
-    const history = useHistory();
 
-    const hideModal = () => {
-        setVisible(false);
+    const showCancelModal = () => {
+        setCancelModalVisible(true);
     };
-
-    const handleJointEvent = async (id) => {
+    const handleCategoryList = async () => {
         try {
-            await eventApi.joinEvent(id).then(response => {
-                if (response === undefined) {
-                    notification["error"]({
-                        message: `Notification`,
-                        description:
-                            'Joint Event Failed',
-
-                    });
-                }
-                else {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'Successfully Joint Event',
-                    });
-                    listEvent();
-                }
-            }
-            );
-
-        } catch (error) {
-            console.log('Failed to fetch event list:' + error);
-        }
-    }
-
-    const handleCancelJointEvent = async (id) => {
-        try {
-            await eventApi.cancelJoinEvent(id).then(response => {
-                if (response === undefined) {
-                    notification["error"]({
-                        message: `Notification`,
-                        description:
-                            'Cancel Join Event Failed',
-
-                    });
-                }
-                else {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'Successfully Cancel Joint Event',
-                    });
-                    listEvent();
-                }
-            }
-            );
-
-        } catch (error) {
-            console.log('Failed to fetch event list:' + error);
-        }
-    }
-
-    const listEvent = () => {
-        setLoading(true);
-        (async () => {
-            try {
-                const response = await eventApi.getDetailEvent(id);
-                console.log(response);
-                setOrderList(response);
+            await orderApi.getListOrder({ page: 1, limit: 10000 }).then((res) => {
+                setTotalList(res.totalDocs)
+                setOrder(res.data.docs);
                 setLoading(false);
-
-            } catch (error) {
-                console.log('Failed to fetch event detail:' + error);
-            }
-        })();
-        window.scrollTo(0, 0);
-    }
-
-    const handleDetailEvent = (id) => {
-        history.replace("/event-detail/" + id);
-        window.location.reload();
-        window.scrollTo(0, 0);
-    }
-
-    const getDataForm = async (uid) => {
-        try {
-            await axiosClient.get("/event/" + id + "/template_feedback/" + uid + "/question")
-                .then(response => {
-                    console.log(response);
-                    setDataForm(response);
-                    let tabs = [];
-                    for (let i = 0; i < response.length; i++) {
-                        tabs.push({
-                            content: response[i]?.content,
-                            uid: response[i]?.uid,
-                            is_rating: response[i]?.is_rating
-                        })
-                    }
-                    form.setFieldsValue({
-                        users: tabs
-                    })
-                    setLengthForm(tabs.length)
-                }
-                );
-
+            });
+            ;
         } catch (error) {
-            throw error;
-        }
+            console.log('Failed to fetch event list:' + error);
+        };
     }
 
-    const handleDirector = () => {
-        history.push("/evaluation/" + id)
-    }
-
-    const onFinish = async (values) => {
-        console.log(values.users);
-        let tabs = [];
-        for (let i = 0; i < values.users.length; i++) {
-            tabs.push({
-                scope: values.users[i]?.scope == undefined ? null : values.users[i]?.scope,
-                comment: values.users[i]?.comment == undefined ? null : values.users[i]?.comment,
-                question_uid: values.users[i]?.uid,
-
-            })
-        }
-        console.log(tabs);
+    const handleDeleteCategory = async (id) => {
         setLoading(true);
         try {
-            const dataForm = {
-                "answers": tabs
-            }
-            await axiosClient.post("/event/" + id + "/answer", dataForm)
-                .then(response => {
-                    if (response === undefined) {
-                        notification["error"]({
-                            message: `Notification`,
-                            description:
-                                'Answer event question failed',
+            await orderApi.deleteOrder(id).then(response => {
+                if (response === undefined) {
+                    notification["error"]({
+                        message: `Thông báo`,
+                        description:
+                            'Xóa danh mục thất bại',
 
-                        });
-                        setLoading(false);
-                    }
-                    else {
-                        notification["success"]({
-                            message: `Notification`,
-                            description:
-                                'Successfully answer event question',
-
-                        });
-                        setLoading(false);
-                        form.resetFields();
-                    }
+                    });
+                    setLoading(false);
                 }
-                );
+                else {
+                    notification["success"]({
+                        message: `Thông báo`,
+                        description:
+                            'Xóa danh mục thành công',
+
+                    });
+                    setCurrentPage(1);
+                    handleCategoryList();
+                    setLoading(false);
+                    window.location.reload();
+                }
+            }
+            );
 
         } catch (error) {
-            throw error;
+            console.log('Failed to fetch event list:' + error);
         }
-    };
-
+    }
     const columns = [
         // {
         //     title: 'Mã đơn hàng',
@@ -262,9 +138,9 @@ const CartHistory = () => {
             key: 'status',
             render: (slugs) => (
                 <span >
-                   {slugs === "rejected" ? <Tag style={{width: 90, textAlign: "center"}} color="red">Đã hủy</Tag> : slugs === "approved" ? <Tag style={{width: 90, textAlign: "center"}} color="geekblue" key={slugs}>
+                    {slugs === "rejected" ? <Tag style={{ width: 90, textAlign: "center" }} color="red">Đã hủy</Tag> : slugs === "approved" ? <Tag style={{ width: 90, textAlign: "center" }} color="geekblue" key={slugs}>
                         Vận chuyển
-                    </Tag> : slugs === "final" ? <Tag color="green" style={{width: 90, textAlign: "center"}}>Đã giao</Tag> :<Tag color="blue" style={{width: 90, textAlign: "center"}}>Đợi xác nhận</Tag>}
+                    </Tag> : slugs === "final" ? <Tag color="green" style={{ width: 90, textAlign: "center" }}>Đã giao</Tag> : <Tag color="blue" style={{ width: 90, textAlign: "center" }}>Đợi xác nhận</Tag>}
                 </span>
             ),
         },
@@ -274,8 +150,21 @@ const CartHistory = () => {
             key: 'createdAt',
             render: (createdAt) => (
                 <span>{moment(createdAt).format('DD/MM/YYYY HH:mm')}</span>
-              ),
+            ),
         },
+
+        {
+            title: 'Hành động',
+            key: 'action',
+            render: (text, record) => (
+                <Button type="danger" onClick={() => handleDeleteCategory(record._id)}>
+                    Xóa
+                </Button>
+
+
+            ),
+        },
+
     ];
 
     useEffect(() => {
@@ -297,8 +186,8 @@ const CartHistory = () => {
     return (
         <div>
             <Spin spinning={false}>
-                <div className="container" style={{marginBottom: 30}}>
-                    <h1 style={{fontSize: 25, marginTop: 25, paddingBottom: 25}}>Quản lý đơn hàng</h1>
+                <div className="container" style={{ marginBottom: 30 }}>
+                    <h1 style={{ fontSize: 25, marginTop: 25, paddingBottom: 25 }}>Quản lý đơn hàng</h1>
                     <Card >
                         <Table columns={columns} dataSource={orderList.data} rowKey='_id' pagination={{ position: ['bottomCenter'] }} />
                     </Card>

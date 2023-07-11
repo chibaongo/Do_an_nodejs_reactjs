@@ -70,14 +70,13 @@ const Contact = () => {
                             <div class="row">
                                 <div class="col-lg-4">
                                     <img class="rounded-circle shadow-1-strong mb-4"
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp" alt="avatar"
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
                                     />
-                                    <h5 class="mb-3">Anna Deynah</h5>
-                                    <p>UX Designer</p>
+                                    <h5 class="mb-3">Ngô Chí Bảo</h5>
+                                    <p>Web Developer - Leader Team</p>
                                     <p class="text-muted">
                                         <i class="fas fa-quote-left pe-2"></i>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-                                        officiis hic tenetur quae quaerat ad velit ab hic tenetur.
+                                        61, Đường 77, phường Tân Quy, Quận 7, TP HCM
                                     </p>
                                     <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
                                         <li><i class="fas fa-star fa-sm"></i></li>
@@ -92,12 +91,11 @@ const Contact = () => {
                                     <img class="rounded-circle shadow-1-strong mb-4"
                                         src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
                                     />
-                                    <h5 class="mb-3">John Doe</h5>
+                                    <h5 class="mb-3">Trần Quyết Chiến </h5>
                                     <p>Web Developer</p>
                                     <p class="text-muted">
                                         <i class="fas fa-quote-left pe-2"></i>
-                                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-                                        suscipit laboriosam, nisi ut aliquid commodi.
+                                        142/36/3, Nguyễn Thị Thập, phường Bình Thuận, Quận 7, TP HCM
                                     </p>
                                     <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
                                         <li><i class="fas fa-star fa-sm"></i></li>
@@ -110,7 +108,7 @@ const Contact = () => {
                                     </ul>
                                 </div>
 
-                                <div class="col-lg-4 d-none d-lg-block">
+                                {/* <div class="col-lg-4 d-none d-lg-block">
                                     <img class="rounded-circle shadow-1-strong mb-4"
                                         src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar"
                                     />
@@ -128,13 +126,13 @@ const Contact = () => {
                                         <li><i class="fas fa-star fa-sm"></i></li>
                                         <li><i class="far fa-star fa-sm"></i></li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container pb-5">
+            {/* <div class="container pb-5">
                 <section class="text-center">
                     <h3 class="mb-5">Liên hệ</h3>
                     <div class="row">
@@ -198,7 +196,7 @@ const Contact = () => {
                         </div>
                     </div>
                 </section>
-            </div>
+            </div> */}
         </div>
     )
 }

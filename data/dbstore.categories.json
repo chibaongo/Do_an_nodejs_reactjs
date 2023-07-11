@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "64a6a17dacf5748715605d66"
+  },
+  "name": "Xe đạp Địa hình",
+  "description": "Xe đạp Địa hình",
+  "slug": "Xe đạp Địa hình",
+  "image": "http://localhost:3100/uploads\\1688641917682-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-06T11:11:57.711Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-06T11:11:57.711Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64a6a1bbacf5748715605d6a"
+  },
+  "name": "Xe đạp Đua",
+  "description": "Xe đạp Đua (road bike)",
+  "slug": "Xe đạp Đua",
+  "image": "http://localhost:3100/uploads\\1688641979742-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-06T11:12:59.762Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-06T11:12:59.762Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64a6a1f3acf5748715605d6e"
+  },
+  "name": "Xe đạp Đường phố",
+  "description": "Xe đạp Đường phố (city bike)",
+  "slug": "Xe đạp Đường phố",
+  "image": "http://localhost:3100/uploads\\1688642035396-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-06T11:13:55.422Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-06T11:13:55.422Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64a6b19aacf5748715605eef"
+  },
+  "name": "Xe đạp Trẻ em",
+  "description": "Xe đạp Trẻ em",
+  "slug": "Xe đạp Trẻ em",
+  "image": "http://localhost:3100/uploads\\1688646042753-LOGO.png",
+  "createdAt": {
+    "$date": "2023-07-06T12:20:42.776Z"
+  },
+  "updatedAt": {
+    "$date": "2023-07-06T12:20:42.776Z"
+  },
+  "__v": 0
+}]
