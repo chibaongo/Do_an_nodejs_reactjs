@@ -158,7 +158,7 @@ const CartHistory = () => {
             key: 'action',
             render: (text, record) => (
                 <Button type="danger" onClick={() => handleDeleteCategory(record._id)}>
-                    Xóa
+                    Hủy
                 </Button>
 
 
