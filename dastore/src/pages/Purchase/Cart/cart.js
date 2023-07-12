@@ -18,6 +18,7 @@ import {
 import { HistoryOutlined, AuditOutlined, AppstoreAddOutlined, CloseOutlined, UserOutlined, DeleteOutlined, CreditCardOutlined, HomeOutlined, CheckOutlined } from '@ant-design/icons';
 
 import Slider from "react-slick";
+import { min } from "moment";
 
 const { Meta } = Card;
 const { Option } = Select;
