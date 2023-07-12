@@ -37,6 +37,7 @@ const Cart = () => {
     const [lengthForm, setLengthForm] = useState();
     const [cartLength, setCartLength] = useState();
     const [cartTotal, setCartTotal] = useState();
+
     const [form] = Form.useForm();
     let { id } = useParams();
     const history = useHistory();
@@ -161,6 +162,7 @@ const Cart = () => {
     };
 
     const updateQuantity = (productId, newQuantity) => {
+
         console.log(newQuantity);
         // Tìm kiếm sản phẩm trong giỏ hàng
         const updatedCart = productDetail.map((item) => {

@@ -330,25 +330,28 @@ const ProductList = () => {
                         </div>
                     ))}
                 </div>
-                <div className="container">  
+                <div className="container">
                     <Slider
                         range
                         min={0}
                         max={40000000}
                         value={[minPrice, maxPrice]}
                         onChange={handleSliderChange}
-                    />        
+                    />
                     <div>
-                    <Button type="primary" style={{marginTop: '8px', borderRadius: '12px', marginRight: '10px', textAlign: 'center' }} icon={<SearchOutlined/>}
-                         onClick={() => handleSearchClick()}>
-                        Tìm kiếm
-                    </Button>
-                       <a style={{ fontWeight:'bold' }}>Phạm vi giá </a>   
-                        <a style={{ color: 'red' }}>Từ:  {minPrice}VNĐ ----- Đến: {maxPrice} VNĐ</a> 
-                      
+                        <Button type="primary" style={{ marginTop: '8px', borderRadius: '12px', marginRight: '10px', textAlign: 'center' }} icon={<SearchOutlined />}
+                            onClick={() => handleSearchClick()}>
+                            Tìm kiếm
+                        </Button>
+                        <a style={{ fontWeight: 'bold' }}>Phạm vi giá </a>
+                        <a style={{ color: 'red' }}>Từ:
+                            {minPrice.toLocaleString('vi', { style: 'currency', currency: 'VND' })} ----- Đến:
+                            {maxPrice.toLocaleString('vi', { style: 'currency', currency: 'VND' })}
+                        </a>
+
                     </div>
-                  
-                 
+
+
                 </div>
                 <div className="list-products container" key="1" style={{ marginTop: 50, marginBottom: 50 }}>
                     <Row>
