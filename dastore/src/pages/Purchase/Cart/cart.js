@@ -162,23 +162,6 @@ const Cart = () => {
         }
     };
 
-    // const updateQuantity = (productId, newQuantity) => {
-
-    //     console.log(newQuantity);
-    //     // Tìm kiếm sản phẩm trong giỏ hàng
-    //     const updatedCart = productDetail.map((item) => {
-    //         if (item._id === productId) {
-    //             // Cập nhật số lượng và tính toán tổng tiền
-    //             item.quantity = newQuantity;
-    //             item.total = item.price * newQuantity;
-    //         }
-    //         return item;
-    //     });
-    //     const total = updatedCart.reduce((acc, item) => acc + (item.quantity * item.price), 0);
-    //     setCartTotal(total);
-    //     localStorage.setItem("cart", JSON.stringify(updatedCart));
-    //     setProductDetail(updatedCart);
-    // }
     const updateQuantity = (productId, newQuantity) => {
         if (newQuantity === null || isNaN(newQuantity) || newQuantity < 1 || newQuantity > 10) {
             // Giữ nguyên giá trị là 1 nếu giá trị số lượng không hợp lệ
@@ -261,17 +244,7 @@ const Cart = () => {
                     }}
                 />
 
-                // <InputNumber
-                //     required
-                //     type="number"
-                //     min={1}
-                //     max={10}
-                //     defaultValue={text}
-                //     onChange={(value) => {
-                //         // gọi hàm updateQuantity để cập nhật số lượng sản phẩm
-                //         updateQuantity(record._id, value);
-                //     }}
-                // />
+
             ),
         },
         {
