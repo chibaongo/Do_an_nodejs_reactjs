@@ -106,6 +106,7 @@ const Cart = () => {
     }
 
     const handlePay = () => {
+
         history.push("/pay")
     }
 
@@ -161,7 +162,28 @@ const Cart = () => {
         }
     };
 
+    // const updateQuantity = (productId, newQuantity) => {
+
+    //     console.log(newQuantity);
+    //     // Tìm kiếm sản phẩm trong giỏ hàng
+    //     const updatedCart = productDetail.map((item) => {
+    //         if (item._id === productId) {
+    //             // Cập nhật số lượng và tính toán tổng tiền
+    //             item.quantity = newQuantity;
+    //             item.total = item.price * newQuantity;
+    //         }
+    //         return item;
+    //     });
+    //     const total = updatedCart.reduce((acc, item) => acc + (item.quantity * item.price), 0);
+    //     setCartTotal(total);
+    //     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    //     setProductDetail(updatedCart);
+    // }
     const updateQuantity = (productId, newQuantity) => {
+        if (newQuantity === null || isNaN(newQuantity) || newQuantity < 1 || newQuantity > 10) {
+            // Giữ nguyên giá trị là 1 nếu giá trị số lượng không hợp lệ
+            newQuantity = 1;
+        }
 
         console.log(newQuantity);
         // Tìm kiếm sản phẩm trong giỏ hàng
@@ -173,11 +195,13 @@ const Cart = () => {
             }
             return item;
         });
-        const total = updatedCart.reduce((acc, item) => acc + (item.quantity * item.price), 0);
+
+        const total = updatedCart.reduce((acc, item) => acc + item.quantity * item.price, 0);
         setCartTotal(total);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         setProductDetail(updatedCart);
-    }
+    };
+
 
     const handleDelete = async (productId) => {
         const updatedCart = JSON.parse(localStorage.getItem('cart'));
@@ -226,12 +250,28 @@ const Cart = () => {
                     type="number"
                     min={1}
                     max={10}
-                    defaultValue={text}
+                    value={text}
                     onChange={(value) => {
-                        // gọi hàm updateQuantity để cập nhật số lượng sản phẩm
-                        updateQuantity(record._id, value);
+                        if (value === null || isNaN(value) || value < 1 || value > 10) {
+                            // Giữ nguyên giá trị là 1 nếu giá trị số lượng không hợp lệ
+                            updateQuantity(record._id, 1);
+                        } else {
+                            updateQuantity(record._id, value);
+                        }
                     }}
                 />
+
+                // <InputNumber
+                //     required
+                //     type="number"
+                //     min={1}
+                //     max={10}
+                //     defaultValue={text}
+                //     onChange={(value) => {
+                //         // gọi hàm updateQuantity để cập nhật số lượng sản phẩm
+                //         updateQuantity(record._id, value);
+                //     }}
+                // />
             ),
         },
         {
