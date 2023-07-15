@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./cartHistory.css";
+// import styles from "./cartHistory.css";
 import axiosClient from "../../../apis/axiosClient";
 import { useParams } from "react-router-dom";
 import eventApi from "../../../apis/eventApi";
@@ -24,19 +24,12 @@ const { Option } = Select;
 
 const { Title } = Typography;
 const DATE_TIME_FORMAT = "DD/MM/YYYY HH:mm";
-const { TextArea } = Input;
+
 
 const CartHistory = () => {
 
     const [orderList, setOrderList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [suggest, setSuggest] = useState([]);
-    const [visible, setVisible] = useState(false);
-    const [dataForm, setDataForm] = useState([]);
-    const [lengthForm, setLengthForm] = useState();
-    const [form] = Form.useForm();
-    const [template_feedback, setTemplateFeedback] = useState();
-
     const [currentPage, setCurrentPage] = useState();
     const [total, setTotalList] = useState();
     const [order, setOrder] = useState([]);
@@ -44,164 +37,8 @@ const CartHistory = () => {
     const [openModalUpdate, setOpenModalUpdate] = useState(false);
     const [id, setId] = useState();
     const [form2] = Form.useForm();
-    //let { id } = useParams();
-    const history = useHistory();
 
-    const hideModal = () => {
-        setVisible(false);
-    };
 
-    const handleJointEvent = async (id) => {
-        try {
-            await eventApi.joinEvent(id).then(response => {
-                if (response === undefined) {
-                    notification["error"]({
-                        message: `Notification`,
-                        description:
-                            'Joint Event Failed',
-
-                    });
-                }
-                else {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'Successfully Joint Event',
-                    });
-                    listEvent();
-                }
-            }
-            );
-
-        } catch (error) {
-            console.log('Failed to fetch event list:' + error);
-        }
-    }
-
-    const handleCancelJointEvent = async (id) => {
-        try {
-            await eventApi.cancelJoinEvent(id).then(response => {
-                if (response === undefined) {
-                    notification["error"]({
-                        message: `Notification`,
-                        description:
-                            'Cancel Join Event Failed',
-
-                    });
-                }
-                else {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'Successfully Cancel Joint Event',
-                    });
-                    listEvent();
-                }
-            }
-            );
-
-        } catch (error) {
-            console.log('Failed to fetch event list:' + error);
-        }
-    }
-
-    const listEvent = () => {
-        setLoading(true);
-        (async () => {
-            try {
-                const response = await eventApi.getDetailEvent(id);
-                console.log(response);
-                setOrderList(response);
-                setLoading(false);
-
-            } catch (error) {
-                console.log('Failed to fetch event detail:' + error);
-            }
-        })();
-        window.scrollTo(0, 0);
-    }
-
-    const handleDetailEvent = (id) => {
-        history.replace("/event-detail/" + id);
-        window.location.reload();
-        window.scrollTo(0, 0);
-    }
-
-    const getDataForm = async (uid) => {
-        try {
-            await axiosClient.get("/event/" + id + "/template_feedback/" + uid + "/question")
-                .then(response => {
-                    console.log(response);
-                    setDataForm(response);
-                    let tabs = [];
-                    for (let i = 0; i < response.length; i++) {
-                        tabs.push({
-                            content: response[i]?.content,
-                            uid: response[i]?.uid,
-                            is_rating: response[i]?.is_rating
-                        })
-                    }
-                    form.setFieldsValue({
-                        users: tabs
-                    })
-                    setLengthForm(tabs.length)
-                }
-                );
-
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    const handleDirector = () => {
-        history.push("/evaluation/" + id)
-    }
-
-    const onFinish = async (values) => {
-        console.log(values.users);
-        let tabs = [];
-        for (let i = 0; i < values.users.length; i++) {
-            tabs.push({
-                scope: values.users[i]?.scope == undefined ? null : values.users[i]?.scope,
-                comment: values.users[i]?.comment == undefined ? null : values.users[i]?.comment,
-                question_uid: values.users[i]?.uid,
-
-            })
-        }
-        console.log(tabs);
-        setLoading(true);
-        try {
-            const dataForm = {
-                "answers": tabs
-            }
-            await axiosClient.post("/event/" + id + "/answer", dataForm)
-                .then(response => {
-                    if (response === undefined) {
-                        notification["error"]({
-                            message: `Notification`,
-                            description:
-                                'Answer event question failed',
-
-                        });
-                        setLoading(false);
-                    }
-                    else {
-                        notification["success"]({
-                            message: `Notification`,
-                            description:
-                                'Successfully answer event question',
-
-                        });
-                        setLoading(false);
-                        form.resetFields();
-                    }
-                }
-                );
-
-        } catch (error) {
-            throw error;
-        }
-    };
     const handleCategoryList = async () => {
         try {
             await orderApi.getListOrder({ page: 1, limit: 10000 }).then((res) => {
@@ -214,42 +51,7 @@ const CartHistory = () => {
             console.log('Failed to fetch event list:' + error);
         };
     }
-
-
     //xử lí trạng thái đơn hàng
-    const handleOkUser = async (values) => {
-        setLoading(true);
-        try {
-            const categoryList = {
-                "name": values.name,
-                "description": values.description,
-                "slug": values.slug
-            }
-            await axiosClient.post("/category", categoryList).then(response => {
-                if (response === undefined) {
-                    notification["error"]({
-                        message: `Thông báo`,
-                        description:
-                            'Tạo danh mục thất bại',
-                    });
-                }
-                else {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'Tạo danh mục thành công',
-                    });
-                    setOpenModalCreate(false);
-                    handleCategoryList();
-                }
-            })
-            setLoading(false);
-
-        } catch (error) {
-            throw error;
-        }
-    }
-
     const handleUpdateOrder = async (values) => {
         console.log(values);
         setLoading(true);
@@ -258,21 +60,19 @@ const CartHistory = () => {
                 "description": values.description,
                 "status": values.status
             }
-
             await axiosClient.put("/order/" + id, categoryList).then(response => {
-                if (response === 'pending') {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'hủy đơn hàng thành công',
-                    });
-
-                }
-                else {
+                if (response === undefined) {
                     notification["error"]({
                         message: `Thông báo`,
                         description:
                             'hủy đơn hàng thất bại',
+                    });
+                }
+                else {
+                    notification["success"]({
+                        message: `Thông báo`,
+                        description:
+                            'hủy đơn hàng thành công',
                     });
                     setOpenModalUpdate(false);
                     handleCategoryList();
@@ -285,7 +85,6 @@ const CartHistory = () => {
             throw error;
         }
     }
-
     const handleCancel = (type) => {
         if (type === "create") {
             setOpenModalCreate(true);
@@ -295,23 +94,6 @@ const CartHistory = () => {
         console.log('Clicked cancel button');
     };
 
-    const handleCancelOder = async (orderId) => {
-        try {
-            handleCategoryList();
-            const order = await orderApi.getDetailOrder(orderId);
-            if (order.status === 'pending') {
-                alert('hủy đơn hàng thành công');
-                return;
-            }
-            else {
-                alert('hủy đơn hàng thất bại');
-            }
-        }
-        catch (error) {
-            console.error('Lỗi khi hủy đơn hàng:', error);
-            alert('Đã xảy ra lỗi khi hủy đơn hàng. Vui lòng thử lại sau.');
-        }
-    }
     const handleEditOrder = (id) => {
         setOpenModalUpdate(true);
         (async () => {
@@ -337,26 +119,7 @@ const CartHistory = () => {
             }
         })();
     }
-
-    const handleFilter = async (name) => {
-        try {
-            const res = await orderApi.searchOrder(name);
-            setTotalList(res.totalDocs)
-            setOrder(res.data.docs);
-        } catch (error) {
-            console.log('search to fetch category list:' + error);
-        }
-    }
-
-
-
-
     const columns = [
-        // {
-        //     title: 'Mã đơn hàng',
-        //     dataIndex: '_id',
-        //     key: '_id',
-        // },
         {
             title: 'Sản phẩm',
             dataIndex: 'products',
@@ -449,19 +212,34 @@ const CartHistory = () => {
                     <Row>
                         <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
 
-                            <Button
+                            {/* <Button
                                 size="small"
-
+                                
                                 style={{ width: 150, borderRadius: 15, height: 30 }}
                                 onClick={() => handleEditOrder(record._id)}
                             >
                                 Chỉnh sửa
-                            </Button>
+                            </Button> */}
+                            <Popconfirm
+                                title="Bạn có chắc chắn hủy đơn hàng này?"
+                                onConfirm={() => handleEditOrder(record._id)}
+                                okText="Yes"
+                                cancelText="No"
+                            >
+                                <Button
+                                    size="small"
+                                    //icon={<DeleteOutlined />}
+                                    style={{ width: 150, borderRadius: 15, height: 30 }}
+                                >
+                                    hủy
+                                </Button>
+                            </Popconfirm>
 
                         </div>
                     </Row>
 
                 </div >
+
 
             ),
         },
@@ -511,7 +289,7 @@ const CartHistory = () => {
                                     console.log('Validate Failed:', info);
                                 });
                         }}
-                        onCancel={handleCancelOder}
+                        onCancel={handleCancel}
                         okText="Hoàn thành"
                         cancelText="Hủy"
                         width={600}
@@ -528,7 +306,7 @@ const CartHistory = () => {
                         >
                             <Form.Item
                                 name="status"
-                                label="Trạng thái"
+                                label="Yêu cầu"
                                 rules={[
                                     {
                                         required: true,
@@ -538,11 +316,20 @@ const CartHistory = () => {
                                 style={{ marginBottom: 10 }}
                             >
                                 <Select >
-                                    <Option value="rejected">Đã hủy</Option>
+                                    <Option value="rejected">Hủy đơn hàng</Option>
                                 </Select>
                             </Form.Item>
-
-
+                            <Form.Item
+                                name="description"
+                                label="Lý do hủy đơn hàng"
+                                style={{ marginBottom: 10 }}
+                            >
+                                <Input.TextArea rows={4} placeholder="Mô tả lý do " />
+                            </Form.Item>
+                            <p>Khách hàng lưu ý </p>
+                            <p>khi đơn hàng đang chuẩn bị hoặc đang trên đường giao thì khách hàng không được tự ý hủy đơn hàng
+                                vì như vậy sẽ làm ảnh hưởng đến cửa hàng của chúng tôi xin các khách hàng lưu ý</p>
+                            <p>chúng tôi sẽ có biện pháp xử lý đối với những khách hàng không theo quy định của của hàng</p>
                         </Form>
                     </Modal>
                 </div>

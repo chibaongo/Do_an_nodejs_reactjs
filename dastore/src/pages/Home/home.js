@@ -156,16 +156,16 @@ const Home = () => {
                         </Col>
                         <Col span={5} >
                             <div class="right-banner image-promotion">
-                                <a href="https://cellphones.com.vn/samsung-galaxy-z-flip-4.html" class="right-banner__item">
+                                <a href="#" class="right-banner__item">
                                     <img src="https://cdn.tgdd.vn/2023/05/banner/Patin-390x97.png" alt="FOLD4 |FLIP4<br>Giá rẻ bất ngờ" loading="lazy" class="right-banner__img" />
                                 </a>
-                                <a href="https://cellphones.com.vn/tablet/ipad.html?order=filter_price&amp;dir=asc" class="right-banner__item">
+                                <a href="#" class="right-banner__item">
                                     <img src="https://cdn.tgdd.vn/2023/05/banner/Xe-scooter-390x97.png" a lt="IPAD CHÍNH HÃNG<br>Lên đời từ 6.89 triệu" loading="lazy" class="right-banner__img" />
                                 </a>
-                                <a href="https://cellphones.com.vn/laptop-lenovo-ideapad-3-15iau7-82rk001gvn.html" class="right-banner__item">
+                                <a href="#" class="right-banner__item">
                                     <img src="https://cdn.tgdd.vn/2023/03/banner/800-200-800x200-17.png" alt="LENOVO IDEAPAD<br> THIẾT KẾ CỨNG CÁP" loading="lazy" class="right-banner__img" />
                                 </a>
-                                <a href="https://cellphones.com.vn/laptop-lenovo-ideapad-3-15iau7-82rk001gvn.html" class="right-banner__item">
+                                <a href="#" class="right-banner__item">
                                     <img src="	https://cdn.tgdd.vn/2023/06/banner/800x200-800x200-4.png" alt="LENOVO IDEAPAD<br> THIẾT KẾ CỨNG CÁP" loading="lazy" class="right-banner__img" />
                                 </a>
                             </div>
@@ -318,7 +318,7 @@ const Home = () => {
                         <p>Sản Phẩm <strong style={{ color: "#3b1d82" }}>Giảm Sốc</strong></p>
                     </div> */}
 
-                    <div className="list-products container" key="1">
+                    {/* <div className="list-products container" key="1">
                         <Row>
                             <Col>
                                 <div className="title-category">
@@ -381,147 +381,22 @@ const Home = () => {
                                 </Col>
                             ))}
                         </Row>
-                    </div>
+                    </div> */}
                 </div>
 
-                {/* <div class="container-home container">
-                    <div className="sale-2">
-                        <div class="banner-block-1 banner-block">
-                            <img src="https://maraviyainfotech.com/projects/ekka/ekka-v34/ekka-html/assets/images/banner/23.png" alt="" />
-                            <div class="banner-content">
-                                <span class="ec-banner-stitle">Xiaoyi YI 1080p</span>
-                                <span class="ec-banner-title">WiFi IP Camera 36</span>
-                                <span class="ec-banner-btn"><a href="#" class="btn-primary">Mua Ngay</a></span>
-                            </div>
-                        </div>
-                        <div class="banner-block-2 banner-block">
-                            <img src="https://maraviyainfotech.com/projects/ekka/ekka-v34/ekka-html/assets/images/banner/24.png" alt="" />
-                            <div class="banner-content ">
-                                <span class="ec-banner-stitle">lenovo tablets</span>
-                                <span class="ec-banner-title">UP to 70% OFF</span>
-                                <span class="ec-banner-btn"><a href="#" class="btn-primary">Mua Ngay</a></span>
-                            </div>
-                        </div>
 
-                    </div>
-                </div> */}
-
-                {/* <div className="image-one" >
-                    <div className="texty-demo">
-                        <Texty>Giờ Vàng</Texty>
-                    </div>
-                    <div className="texty-title">
-                        <p>Nhãn Hàng <strong style={{ color: "#3b1d82" }}>Nỗi Bật</strong></p>
-                    </div>
-
-                    <div className="list-products container" key="1">
-                        <Row>
-                            <Col>
-                                <div className="title-category">
-                                    <a href="" class="title">
-                                        <h3></h3>
-                                    </a>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row
-                            gutter={{ xs: 8, sm: 16, md: 24, lg: 48 }}
-                            className="row-product"
-                        >
-                            {productsTablet.map((item) => (
-                                <Col
-                                    xl={{ span: 6 }}
-                                    lg={{ span: 8 }}
-                                    md={{ span: 12 }}
-                                    sm={{ span: 12 }}
-                                    xs={{ span: 24 }}
-                                    className='col-product'
-                                    onClick={() => handleReadMore(item._id)}
-                                    key={item._id}
-                                >
-                                    <div className="show-product">
-                                        {item.image ? (
-                                            <img
-                                                className='image-product'
-                                                src={item.image}
-                                            />
-                                        ) : (
-                                            <img
-                                                className='image-product'
-                                                src={require('../../assets/image/NoImageAvailable.jpg')}
-                                            />
-                                        )}
-                                        <div className='wrapper-products'>
-                                            <Paragraph
-                                                className='title-product'
-                                                ellipsis={{ rows: 2 }}
-                                            >
-                                                {item.name}
-                                            </Paragraph>
-                                            <div className="price-amount">
-                                                <Paragraph className='price-product'>
-                                                    {numberWithCommas(item.price - item.promotion)} đ
-                                                </Paragraph>
-                                                {item.promotion !== 0 &&
-                                                    <Paragraph className='price-cross'>
-                                                        {numberWithCommas(item.price)} đ
-                                                    </Paragraph>
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <Paragraph className='badge' style={{ position: 'absolute', top: 10, left: 9 }}>
-                                        <span>Giảm giá</span>
-                                        <img src={triangleTopRight} />
-                                    </Paragraph>
-                                </Col>
-                            ))}
-                        </Row>
-                    </div>
-                </div> */}
 
                 <div class="container">
                     <div class="ec-offer-inner ofr-img">
                         <div class="col-sm-6 ec-offer-content">
                             <div class="ec-offer-content-inner">
-                                {/* <h2 class="ec-offer-stitle">Ngày Hội Giảm Giá</h2>
-                                <h2 class="ec-offer-title">Lên đến 60%</h2>
-                                <span class="ec-offer-desc">Lựa chọn những sản phẩm yêu thích của bạn!</span>
-                                <span class="ec-offer-btn"><a href="#" class="btn btn-primary">Mua Ngay</a></span> */}
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* <div className="image-footer">
-                    <OverPack style={{ overflow: 'hidden', height: 800, marginTop: 20 }} >
-                        <TweenOne key="0" animation={{ opacity: 1 }}
-                            className="code-box-shape"
-                            style={{ opacity: 0 }}
-                        />
-                        <QueueAnim key="queue"
-                            animConfig={[
-                                { opacity: [1, 0], translateY: [0, 50] },
-                                { opacity: [1, 0], translateY: [0, -50] }
-                            ]}
-                        >
-                            <div className="texty-demo-footer">
-                                <Texty>NHANH LÊN! </Texty>
-                            </div>
-                            <div className="texty-title-footer">
-                                <p>Tham Dự Buổi <strong>Ra Mắt iphone 14</strong></p>
-                            </div>
-                            <Row justify="center" style={{ marginBottom: 40, fill: "#FFFFFF" }}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="71px" height="11px"> <path fill-rule="evenodd" d="M59.669,10.710 L49.164,3.306 L39.428,10.681 L29.714,3.322 L20.006,10.682 L10.295,3.322 L1.185,10.228 L-0.010,8.578 L10.295,0.765 L20.006,8.125 L29.714,0.765 L39.428,8.125 L49.122,0.781 L59.680,8.223 L69.858,1.192 L70.982,2.895 L59.669,10.710 Z"></path></svg>
-                            </Row>
-                            <Row justify="center">
-                                <a href="/event" class="footer-button" role="button">
-                                    <span>ĐĂNG KÝ NGAY</span>
-                                </a>
-                            </Row>
-                        </QueueAnim>
-                    </OverPack>
-                </div> */}
+
             </div>
             {/* {visible ?
                 <div class="spinner-border" role="status">

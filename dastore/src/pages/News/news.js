@@ -11,57 +11,11 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 const { Search } = Input;
 
 const News = () => {
-
     const [news, setNews] = useState([]);
     let history = useHistory();
 
     const onFinish = async (values) => {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        var date = yyyy + "-" + mm + "-" + dd;
-
-        try {
-            const formatData = {
-                "email": values.email,
-                "username": values.username,
-                "password": values.password,
-                "phone": values.phoneNo,
-                "role": "isClient",
-                "status": "actived"
-            }
-            await axiosClient.post("http://localhost:3100/api/auth/register", formatData)
-                .then(response => {
-                    console.log(response);
-                    if (response === "Email is exist") {
-                        return notification["error"]({
-                            message: "Thông báo",
-                            description: "Email đã tồn tại",
-
-                        });
-                    }
-                    if (response === undefined) {
-                        notification["error"]({
-                            message: "Thông báo",
-                            description: "Đăng ký thất bại",
-
-                        });
-                    }
-                    else {
-                        notification["success"]({
-                            message: "Thông báo",
-                            description: "Đăng kí thành công",
-                        });
-                        setTimeout(function () {
-                            history.push("/login");
-                        }, 1000);
-                    }
-                }
-                );
-        } catch (error) {
-            throw error;
-        }
+        // ...
     }
 
     useEffect(() => {
@@ -70,16 +24,26 @@ const News = () => {
                 await productApi.getNews().then((item) => {
                     setNews(item.data.docs);
                 });
-
             } catch (error) {
                 console.log('Failed to fetch event detail:' + error);
             }
         })();
         window.scrollTo(0, 0);
-    }, [])
+    }, []);
+
+    const handleMouseEnter = (e) => {
+        e.currentTarget.classList.add("zoomed");
+    };
+
+    const handleMouseLeave = (e) => {
+        e.currentTarget.classList.remove("zoomed");
+    };
+
     return (
-        <div class="pt-5 container">
-            <List
+      
+        <div className="pt-5 container" style={{ marginBottom: '300px' }}>
+            
+            <List 
                 grid={{
                     gutter: 16,
                     xs: 1,
@@ -87,21 +51,31 @@ const News = () => {
                     md: 4,
                     lg: 4,
                     xl: 6,
-                    xxl: 4,
+                    xxl: 5,
                 }}
                 dataSource={news}
                 renderItem={(item) => (
                     <Link to={`/news/${item._id}`}>
-                        <Card>
-                            <div style={{ padding: 20 }}>{item.name}</div>
-                            <img src={item.image} alt="News Image" style={{ width: '100%', height: 'auto' }} />
+                        <Card className="news-card">
+                            <div 
+                                className="news-item"
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                <div className="news-item-content">
+                                    <div className="news-item-title">{item.name}</div>
+                                    <div className="news-item-image-container">
+                                        <img src={item.image} alt="News Image" className="news-item-image" />
+                                    </div>
+                                </div>
+
+                            </div>
                         </Card>
                     </Link>
                 )}
             />
-
         </div>
-    )
+    );
 }
 
 export default News;

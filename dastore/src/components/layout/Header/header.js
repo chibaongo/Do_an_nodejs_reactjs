@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './header.module.css';
 import userApi from "../../../apis/userApi";
-import logo from "../../../assets/image/logo-dtu.png";
+import logo from "../../../assets/image/logonew.png";
 import DropdownAvatar from "../../DropdownMenu/dropdownMenu";
 import { useHistory, NavLink } from "react-router-dom";
 import { Layout, Avatar, Badge, Row, Col, List, Popover, Modal, Drawer, Select } from 'antd';
@@ -83,15 +83,15 @@ function Topbar() {
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectOptions, setSelectOptions] = useState([
-    
+
   ]);
 
   const handleSelectChange = async (value) => {
     setSelectedOption(value);
     console.log(value);
-    history.push("/product-detail/"+value);
+    history.push("/product-detail/" + value);
     window.location.reload();
-    };
+  };
 
   const updateSelectOptions = (newOptions) => {
     const updatedOptions = newOptions.map((option) => ({
@@ -132,11 +132,11 @@ function Topbar() {
 
   return (
     <Header
-      style={{ background: "#D70018" }}
+      style={{ background: "#008CFF" }}
       className={styles.header}
     >
-      <div className="">
-        <img style={{ color: "#000000", fontSize: 15, height: 55, cursor: "pointer" }} src={logo} onClick={() => handleLink("/home")}></img>
+      <div className="" style={{ width: '100px' ,}}>
+        <img style={{ color: "#000000", fontSize: 50, height: 120, cursor: "pointer" }} src={logo} onClick={() => handleLink("/home")}></img>
       </div>
       <BarsOutlined className={styles.bars} onClick={showDrawer} />
       <div className={styles.navmenu} style={{ marginLeft: 15 }}>
@@ -171,7 +171,7 @@ function Topbar() {
         <div style={{ position: 'relative', display: 'flex', float: 'right', alignItems: "center", cursor: 'pointer' }}>
           <Row>
             <Col onClick={() => handleLink("/cart")}>
-              <p style={{ marginRight: 10, padding: 0, margin: 0, color: '#FFFFFF' }}><ShoppingOutlined style={{ fontSize: '18px', color: '#FFFFFF' }} /> {cart} sản phẩm</p>
+              <p style={{ marginRight: 30, padding: 0, margin: 0, color: '#FFFFFF' }}><ShoppingOutlined style={{ fontSize: '18px', color: '#FFFFFF' }} /> {cart} sản phẩm</p>
             </Col>
             <Col>
               <Badge style={{ marginLeft: 10 }} overflowCount={9999} count={userData?.score > 0 ? userData?.score : 0} />
@@ -216,8 +216,8 @@ function Topbar() {
           </NavLink>
           <div className={styles.navlink2}>
             <div style={{ display: 'flex', cursor: 'pointer' }} onClick={() => handleLink("/cart")}>
-              <p style={{ marginRight: 10, padding: 0, margin: 0, color: 'black' }}><ShoppingOutlined style={{ fontSize: '18px', color: 'black' }} /> {cart} sản phẩm</p>
-              <Badge style={{ marginLeft: 10 }} overflowCount={9999} count={userData?.score > 0 ? userData?.score : 0} />
+              <p style={{ marginRight: 15, padding: 0, margin: 0, color: 'black' }}><ShoppingOutlined style={{ fontSize: '18px', color: 'black' }} /> {cart} sản phẩm</p>
+              <Badge style={{ marginRight: 15 }} overflowCount={9999} count={userData?.score > 0 ? userData?.score : 0} />
             </div>
           </div>
           <div className={styles.navlink2}>
