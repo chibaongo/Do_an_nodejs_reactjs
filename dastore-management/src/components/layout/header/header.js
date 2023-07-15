@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./header.css";
-import logo from "../../../assets/image/logo-dtu.png";
+import logo from "../../../assets/image/logonew.png";
 import MenuDropdown from "../../DropdownMenu/dropdownMenu";
 import { Layout, Dropdown, Badge, Row, Col, Popover, Modal, List, Avatar, Menu } from 'antd';
 import { TranslationOutlined, BellOutlined, NotificationTwoTone } from '@ant-design/icons';
@@ -59,13 +59,13 @@ function Topbar() {
         <img alt="" style={{ background: "#FFFFFF", float: 'left', width: 35, height: 18, marginRight: 8 }} src={vn} />
         <a target="_blank" rel="noopener noreferrer">
           VIỆT NAM
-      </a>
+        </a>
       </Menu.Item>
       <Menu.Item key="2" style={{ display: "flex", alignItems: 'center' }}  >
         <img alt="" style={{ background: "#FFFFFF", float: 'left', width: 35, height: 18, marginRight: 8 }} src={en} />
         <a target="_blank" rel="noopener noreferrer" >
           ENGLISH
-      </a>
+        </a>
       </Menu.Item>
     </Menu>
   );

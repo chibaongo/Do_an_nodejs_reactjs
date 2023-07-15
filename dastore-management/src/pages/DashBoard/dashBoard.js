@@ -63,7 +63,7 @@ const DashBoard = () => {
             title: 'Tổng tiền',
             dataIndex: 'orderTotal',
             key: 'orderTotal',
-            render: (text) => <a>{text}</a>,
+            render: (text) => <a>{text.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</a>,
         },
         {
             title: 'Hình thức thanh toán',
