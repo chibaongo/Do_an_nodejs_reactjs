@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import "./news.css";
 import { DatePicker, Input } from 'antd';
 import { Card, Table, Space, Tag, PageHeader, Divider, Form, List, notification } from 'antd';
@@ -22,6 +23,7 @@ const News = () => {
         (async () => {
             try {
                 await productApi.getNews().then((item) => {
+                    const reversedNews = item.data.docs.reverse(); // Sắp xếp ngược lại mảng tin tức
                     setNews(item.data.docs);
                 });
             } catch (error) {
@@ -38,44 +40,40 @@ const News = () => {
     const handleMouseLeave = (e) => {
         e.currentTarget.classList.remove("zoomed");
     };
-
+    const parseHTML = (html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        return doc.body.textContent || "";
+      };
+    
     return (
-      
-        <div className="pt-5 container" style={{ marginBottom: '300px' }}>
-            
-            <List 
-                grid={{
-                    gutter: 16,
-                    xs: 1,
-                    sm: 2,
-                    md: 4,
-                    lg: 4,
-                    xl: 6,
-                    xxl: 5,
-                }}
-                dataSource={news}
-                renderItem={(item) => (
-                    <Link to={`/news/${item._id}`}>
+        <div className="pt-5 container" style={{ marginBottom: '100px' }}>
+            <div className="news-list">
+                {news.map((item, index) => (
+                    <Link to={`/news/${item._id}`} key={index}>
                         <Card className="news-card">
-                            <div 
+                            <div
                                 className="news-item"
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}
                             >
                                 <div className="news-item-content">
                                     <div className="news-item-title">{item.name}</div>
+                                    <div className="news-item-description">
+                                        {parseHTML(item.description).substring(0, 50)} <p style={{ fontWeight:'bold' }}>xem thêm ...</p>
+                                    </div>
                                     <div className="news-item-image-container">
                                         <img src={item.image} alt="News Image" className="news-item-image" />
                                     </div>
                                 </div>
-
                             </div>
                         </Card>
                     </Link>
-                )}
-            />
+                ))}
+            </div>
         </div>
     );
+
 }
 
 export default News;

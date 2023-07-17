@@ -42,68 +42,6 @@ const Cart = () => {
     let { id } = useParams();
     const history = useHistory();
 
-    const steps = [
-        {
-            title: 'First',
-            content: 'First-content',
-        },
-        {
-            title: 'Second',
-            content: 'Second-content',
-        },
-        {
-            title: 'Last',
-            content: 'Last-content',
-        },
-    ];
-
-    const listEvent = () => {
-        setLoading(true);
-        (async () => {
-            try {
-                const response = await eventApi.getDetailEvent(id);
-                console.log(response);
-                setProductDetail(response);
-                setLoading(false);
-
-            } catch (error) {
-                console.log('Failed to fetch event detail:' + error);
-            }
-        })();
-        window.scrollTo(0, 0);
-    }
-
-    const handleDetailEvent = (id) => {
-        history.replace("/event-detail/" + id);
-        window.location.reload();
-        window.scrollTo(0, 0);
-    }
-
-    const getDataForm = async (uid) => {
-        try {
-            await axiosClient.get("/event/" + id + "/template_feedback/" + uid + "/question")
-                .then(response => {
-                    console.log(response);
-                    setDataForm(response);
-                    let tabs = [];
-                    for (let i = 0; i < response.length; i++) {
-                        tabs.push({
-                            content: response[i]?.content,
-                            uid: response[i]?.uid,
-                            is_rating: response[i]?.is_rating
-                        })
-                    }
-                    form.setFieldsValue({
-                        users: tabs
-                    })
-                    setLengthForm(tabs.length)
-                }
-                );
-
-        } catch (error) {
-            throw error;
-        }
-    }
 
     const handlePay = () => {
 
@@ -116,51 +54,7 @@ const Cart = () => {
         window.location.reload(true)
     }
 
-    const onFinish = async (values) => {
-        console.log(values.users);
-        let tabs = [];
-        for (let i = 0; i < values.users.length; i++) {
-            tabs.push({
-                scope: values.users[i]?.scope == undefined ? null : values.users[i]?.scope,
-                comment: values.users[i]?.comment == undefined ? null : values.users[i]?.comment,
-                question_uid: values.users[i]?.uid,
 
-            })
-        }
-        console.log(tabs);
-        setLoading(true);
-        try {
-            const dataForm = {
-                "answers": tabs
-            }
-            await axiosClient.post("/event/" + id + "/answer", dataForm)
-                .then(response => {
-                    if (response === undefined) {
-                        notification["error"]({
-                            message: `Notification`,
-                            description:
-                                'Answer event question failed',
-
-                        });
-                        setLoading(false);
-                    }
-                    else {
-                        notification["success"]({
-                            message: `Notification`,
-                            description:
-                                'Successfully answer event question',
-
-                        });
-                        setLoading(false);
-                        form.resetFields();
-                    }
-                }
-                );
-
-        } catch (error) {
-            throw error;
-        }
-    };
 
     const updateQuantity = (productId, newQuantity) => {
         if (newQuantity === null || isNaN(newQuantity) || newQuantity < 1 || newQuantity > 10) {

@@ -173,9 +173,6 @@ const Home = () => {
                     </Row>
                 </div >
 
-                {/* <div className="container-home container">
-                    <img src={promotion1} className="promotion1"></img>
-                </div> */}
 
                 <div className="image-one" >
                     <div className="texty-demo">
@@ -185,26 +182,7 @@ const Home = () => {
                         <p>Sản Phẩm <strong style={{ color: "#3b1d82" }}>Giảm Sốc</strong></p>
                     </div>
 
-                    {/* <div class="item" key="0">
-                                <div class="event-item">
-                                    <div class="countdown-timer">
-                                        <ul class="countdown-list" data-countdown="2020/08/08">
-                                            <li class="timer-item days">
-                                                <strong style={{ fontSize: 18 }}>00</strong><br></br><small>days</small>
-                                            </li>
-                                            <li class="timer-item hours">
-                                                <strong style={{ fontSize: 18 }}>00</strong><br></br><small>hours</small>
-                                            </li>
-                                            <li class="timer-item mins">
-                                                <strong style={{ fontSize: 18 }}>00</strong><br></br><small>mins</small>
-                                            </li>
-                                            <li class="timer-item seco">
-                                                <strong style={{ fontSize: 18 }}>00</strong><br></br><small>seco</small>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> */}
+
                     <div className="list-products container" key="1">
                         <Row>
                             <Col>
@@ -235,6 +213,7 @@ const Home = () => {
                                             <img
                                                 className='image-product'
                                                 src={item.image}
+                                                alt='Product Image'
                                             />
                                         ) : (
                                             <img
@@ -261,10 +240,14 @@ const Home = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <Paragraph className='badge' style={{ position: 'absolute', top: 10, left: 9 }}>
-                                        <span>Giảm giá</span>
-                                        <img src={triangleTopRight} />
-                                    </Paragraph>
+
+
+                                    {item.promotion !== 0 &&
+                                        <Paragraph className='badge' style={{ position: 'absolute', top: 10, left: 9 }}>
+                                            <span>Giảm giá</span>
+                                            <img src={triangleTopRight} />
+                                        </Paragraph>
+                                    }
                                 </Col>
                             ))}
                         </Row>
@@ -273,115 +256,10 @@ const Home = () => {
                 <div>
 
                 </div>
-                {/* <div className="heading_slogan">
-                    <div>Tại sao</div>
-                    <div>Nên chọn chúng tôi</div>
-                </div> */}
-                {/* <div className="card_wrap container-home container">
-                    <div>
-                        <Card bordered={false} className="card_suggest card_why card_slogan">
-                            <img src={service6}></img>
-                            <p class="card-text mt-3 fw-bold text-center">Nhanh chóng & Bảo mật <br />Vận chuyển</p>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card bordered={false} className="card_suggest card_why card_slogan">
-                            <img src={service7}></img>
-                            <p class="card-text mt-3 fw-bold text-center">Đảm bảo 100% <br />Chính Hãng</p>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card bordered={false} className="card_suggest card_why card_slogan">
-                            <img src={service8}></img>
-                            <p class="card-text mt-3 fw-bold text-center">24 Giờ <br /> Đổi Trả</p>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card bordered={false} className="card_suggest card_why card_slogan">
-                            <img src={service9}></img>
-                            <p class="card-text mt-3 fw-bold text-center">Giao hàng <br /> Nhanh nhất</p>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card bordered={false} className="card_suggest card_why card_slogan">
-                            <img src={service10}></img>
-                            <p class="card-text mt-3 fw-bold text-center">Hỗ trợ <br /> Nhanh chóng</p>
-                        </Card>
-                    </div>
-                </div> */}
+
 
                 <div className="image-one" >
-                    {/* <div className="texty-demo">
-                        <Texty>Giờ Vàng</Texty>
-                    </div>
-                    <div className="texty-title">
-                        <p>Sản Phẩm <strong style={{ color: "#3b1d82" }}>Giảm Sốc</strong></p>
-                    </div> */}
 
-                    {/* <div className="list-products container" key="1">
-                        <Row>
-                            <Col>
-                                <div className="title-category">
-                                    <a href="" class="title">
-                                        <h3>SẢN PHẨM KHUYẾN MÃI</h3>
-                                    </a>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row
-                            gutter={{ xs: 8, sm: 16, md: 24, lg: 48 }}
-                            className="row-product"
-                        >
-                            {productsPC.map((item) => (
-                                <Col
-                                    xl={{ span: 6 }}
-                                    lg={{ span: 8 }}
-                                    md={{ span: 12 }}
-                                    sm={{ span: 12 }}
-                                    xs={{ span: 24 }}
-                                    className='col-product'
-                                    onClick={() => handleReadMore(item._id)}
-                                    key={item._id}
-                                >
-                                    <div className="show-product">
-                                        {item.image ? (
-                                            <img
-                                                className='image-product'
-                                                src={item.image}
-                                            />
-                                        ) : (
-                                            <img
-                                                className='image-product'
-                                                src={require('../../assets/image/NoImageAvailable.jpg')}
-                                            />
-                                        )}
-                                        <div className='wrapper-products'>
-                                            <Paragraph
-                                                className='title-product'
-                                                ellipsis={{ rows: 2 }}
-                                            >
-                                                {item.name}
-                                            </Paragraph>
-                                            <div className="price-amount">
-                                                <Paragraph className='price-product'>
-                                                    {numberWithCommas(item.promotion)} đ
-                                                </Paragraph>
-                                                {item.promotion !== 0 &&
-                                                    <Paragraph className='price-cross'>
-                                                        {numberWithCommas(item.price)} đ
-                                                    </Paragraph>
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <Paragraph className='badge' style={{ position: 'absolute', top: 10, left: 9 }}>
-                                        <span>Giảm giá</span>
-                                        <img src={triangleTopRight} />
-                                    </Paragraph>
-                                </Col>
-                            ))}
-                        </Row>
-                    </div> */}
                 </div>
 
 
@@ -398,14 +276,8 @@ const Home = () => {
 
 
             </div>
-            {/* {visible ?
-                <div class="spinner-border" role="status">
-                </div> : ""} */}
-            {/* <TawkMessengerReact
-                onLoad={onLoad}
-                ref={tawkMessengerRef}
-                propertyId="63ae4eb547425128790ac3c0"
-                widgetId="1glge6to9" /> */}
+
+
             <BackTop style={{ textAlign: 'right' }} />
         </Spin >
     );

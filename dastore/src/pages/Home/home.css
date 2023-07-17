@@ -974,11 +974,18 @@ ul {
     height: 200px;
     object-fit: fill;
     margin-top: 12px;
+    transition: transform 0.3s;
+
 }
 
-.show-product{
+.image-product:hover {
+    transform: scale(1.4);
+}
+
+.show-product {
     border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;}
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
 
 .wrapper-products {
     display: flex;
@@ -1024,7 +1031,7 @@ ul {
     flex-direction: column;
 }
 
-.badge > span {
+.badge>span {
     font-size: 16px;
     color: #fff !important;
     background-color: #da1b14;
@@ -1032,6 +1039,6 @@ ul {
     padding: 2px 6px;
 }
 
-.badge > img {
+.badge>img {
     width: 8px;
 }

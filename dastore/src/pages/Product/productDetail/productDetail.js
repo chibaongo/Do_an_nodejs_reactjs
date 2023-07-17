@@ -13,8 +13,11 @@ import { HistoryOutlined, AuditOutlined, AppstoreAddOutlined, CloseOutlined, Use
 import Paragraph from "antd/lib/typography/Paragraph";
 import { numberWithCommas } from "../../../utils/common";
 import triangleTopRight from "../../../assets/icon/Triangle-Top-Right.svg"
+import moment from 'moment';
+import 'moment/locale/vi'; // Import ngôn ngữ tiếng Việt (nếu cần)
 
-import Slider from "react-slick";
+// Để sử dụng múi giờ Việt Nam
+moment.locale('vi');
 
 const { Meta } = Card;
 const { Option } = Select;
@@ -46,111 +49,6 @@ const ProductDetail = () => {
         setVisible(false);
     };
 
-    const handleJointEvent = async (id) => {
-        try {
-            await eventApi.joinEvent(id).then(response => {
-                if (response === undefined) {
-                    notification["error"]({
-                        message: `Notification`,
-                        description:
-                            'Joint Event Failed',
-
-                    });
-                }
-                else {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'Successfully Joint Event',
-                    });
-                    listEvent();
-                }
-            }
-            );
-
-        } catch (error) {
-            console.log('Failed to fetch event list:' + error);
-        }
-    }
-
-    const handleCancelJointEvent = async (id) => {
-        try {
-            await eventApi.cancelJoinEvent(id).then(response => {
-                if (response === undefined) {
-                    notification["error"]({
-                        message: `Notification`,
-                        description:
-                            'Cancel Join Event Failed',
-
-                    });
-                }
-                else {
-                    notification["success"]({
-                        message: `Thông báo`,
-                        description:
-                            'Successfully Cancel Joint Event',
-                    });
-                    listEvent();
-                }
-            }
-            );
-
-        } catch (error) {
-            console.log('Failed to fetch event list:' + error);
-        }
-    }
-
-    const listEvent = () => {
-        setLoading(true);
-        (async () => {
-            try {
-                const response = await eventApi.getDetailEvent(id);
-                console.log(response);
-                setProductDetail(response);
-                setLoading(false);
-
-            } catch (error) {
-                console.log('Failed to fetch event detail:' + error);
-            }
-        })();
-        window.scrollTo(0, 0);
-    }
-
-    const handleDetailEvent = (id) => {
-        history.replace("/event-detail/" + id);
-        window.location.reload();
-        window.scrollTo(0, 0);
-    }
-
-    const getDataForm = async (uid) => {
-        try {
-            await axiosClient.get("/event/" + id + "/template_feedback/" + uid + "/question")
-                .then(response => {
-                    console.log(response);
-                    setDataForm(response);
-                    let tabs = [];
-                    for (let i = 0; i < response.length; i++) {
-                        tabs.push({
-                            content: response[i]?.content,
-                            uid: response[i]?.uid,
-                            is_rating: response[i]?.is_rating
-                        })
-                    }
-                    form.setFieldsValue({
-                        users: tabs
-                    })
-                    setLengthForm(tabs.length)
-                }
-                );
-
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    const handleDirector = () => {
-        history.push("/evaluation/" + id)
-    }
 
     const addCart = (product) => {
         console.log(product);
@@ -205,53 +103,6 @@ const ProductDetail = () => {
         localStorage.setItem('cartLength', updatedItems.length);
         history.push("/cart");
     }
-
-    const onFinish = async (values) => {
-        console.log(values.users);
-        let tabs = [];
-        for (let i = 0; i < values.users.length; i++) {
-            tabs.push({
-                scope: values.users[i]?.scope == undefined ? null : values.users[i]?.scope,
-                comment: values.users[i]?.comment == undefined ? null : values.users[i]?.comment,
-                question_uid: values.users[i]?.uid,
-
-            })
-        }
-        console.log(tabs);
-        setLoading(true);
-        try {
-            const dataForm = {
-                "answers": tabs
-            }
-            await axiosClient.post("/event/" + id + "/answer", dataForm)
-                .then(response => {
-                    if (response === undefined) {
-                        notification["error"]({
-                            message: `Notification`,
-                            description:
-                                'Answer event question failed',
-
-                        });
-                        setLoading(false);
-                    }
-                    else {
-                        notification["success"]({
-                            message: `Notification`,
-                            description:
-                                'Successfully answer event question',
-
-                        });
-                        setLoading(false);
-                        form.resetFields();
-                    }
-                }
-                );
-
-        } catch (error) {
-            throw error;
-        }
-    };
-
     const handleReadMore = (id) => {
         console.log(id);
         history.push("/product-detail/" + id);
@@ -287,12 +138,12 @@ const ProductDetail = () => {
             comment,
             rating
         };
-
         // Gọi API đánh giá và bình luận
         await axiosClient
             .post(`/product/${id}/reviews`, payload)
             .then((response => {
                 console.log(response);
+
                 // Xử lý khi gọi API thành công
                 console.log('Review created');
                 // Đóng modal và thực hiện các hành động khác nếu cần
@@ -307,49 +158,18 @@ const ProductDetail = () => {
                 message.error('Đánh giá thất bại: ' + error);
 
             });
+        const currentTime = moment().format('DD/MM/YYYY HH:mm');
+        console.log('Current time:', currentTime);
     };
 
     const [reviews, setProductReview] = useState([]);
     const [reviewsCount, setProductReviewCount] = useState([]);
     const [avgRating, setAvgRating] = useState(null);
-
-    const data = [
-        {
-            key: 'suonXe',
-            dataIndex: 'suonXe',
-            title: 'Suồn Xe',
-        },
-        {
-            key: 'loaiPhanhThang',
-            dataIndex: 'loaiPhanhThang',
-            title: 'Loại Phanh Thắng',
-        },
-        {
-            key: 'boLip',
-            dataIndex: 'boLip',
-            title: 'Bộ Líp',
-        },
-        {
-            key: 'boDia',
-            dataIndex: 'boDia',
-            title: 'Bộ Đĩa',
-        },
-        {
-            key: 'loaiTayDe',
-            dataIndex: 'loaiTayDe',
-            title: 'Loại Tay Đề',
-        },
-        {
-            key: 'phuoc',
-            dataIndex: 'phuoc',
-            title: 'Phuộc',
-        },
-        {
-            key: 'taiTrong',
-            dataIndex: 'taiTrong',
-            title: 'Tải Trọng',
-        },
-    ];
+    const roundedAvgRating = avgRating ? avgRating.toFixed(1) : null;
+    reviews.sort((a, b) => {
+        // So sánh thời gian tạo đánh giá để sắp xếp theo thứ tự giảm dần
+        return moment(b.createdAt).unix() - moment(a.createdAt).unix();
+    });
 
     useEffect(() => {
         (async () => {
@@ -364,6 +184,7 @@ const ProductDetail = () => {
                 });
                 await productApi.getRecommendProduct(id).then((item) => {
                     setRecommend(item?.recommendations);
+
                 });
                 setLoading(false);
 
@@ -497,7 +318,7 @@ const ProductDetail = () => {
                                 </Card>
                             </Col>
                         </Row>
-{/* thông số */}
+                        {/* thông số */}
                         <div>
                             <Descriptions title="Thông số kỹ thuật" bordered>
                                 <Descriptions.Item label="Suồn Xe">{productDetail.suonXe}</Descriptions.Item>
@@ -527,7 +348,7 @@ const ProductDetail = () => {
                                                         <Row gutter={12}>
                                                             <Col span={8}>
                                                                 <div className="comment_total">
-                                                                    <p class="title">{avgRating}/5</p>
+                                                                    <p class="title">{roundedAvgRating}/5</p>
                                                                     <Rate disabled value={avgRating} />
                                                                     <p><strong>{reviews.length}</strong> đánh giá và nhận xét</p>
                                                                 </div>
@@ -635,7 +456,13 @@ const ProductDetail = () => {
                                                                 <List.Item.Meta
                                                                     avatar={<Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=1`} />}
                                                                     title={<a href="https://ant.design">{item?.user?.username}</a>}
-                                                                    description={item?.comment}
+                                                                    // description={item?.comment}
+                                                                    description={
+                                                                        <div>
+                                                                            <p style={{ fontSize: '20', fontWeight: 'bold', fontFamily:'unset' }}>{item?.comment}</p>
+                                                                            <div>{moment(item?.createdAt).format('DD-MM-YYYY HH:mm:ss')}</div>
+                                                                        </div>
+                                                                    }
                                                                 />
                                                             </List.Item>
                                                         )}
@@ -649,7 +476,7 @@ const ProductDetail = () => {
                             </Col>
                         </Row>
                         <div></div>
-                       
+
 
                         <div className="price" style={{ marginTop: 40 }}>
                             <h1 className="product_name">Sản phẩm bạn có thể quan tâm</h1>

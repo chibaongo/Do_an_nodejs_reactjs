@@ -82,9 +82,7 @@ function Topbar() {
   };
 
   const [selectedOption, setSelectedOption] = useState(null);
-  const [selectOptions, setSelectOptions] = useState([
-
-  ]);
+  const [selectOptions, setSelectOptions] = useState([]);
 
   const handleSelectChange = async (value) => {
     setSelectedOption(value);
@@ -97,6 +95,7 @@ function Topbar() {
     const updatedOptions = newOptions.map((option) => ({
       value: option._id,
       label: option.name,
+      image: option.image,
     }));
 
     setSelectOptions(updatedOptions);
@@ -113,8 +112,29 @@ function Topbar() {
     } catch (error) {
       console.error('Lỗi khi gọi API:', error);
     }
-
   };
+
+  // const renderOption = (option) => {
+  //   console.log(option);
+  //   return (
+  //     <Option key={option.value} value={option.value} label={option.label}>
+  //       <div>
+  //         <img src={option.image} alt={option.label} style={{ width: '20px', marginRight: '8px' }} />
+  //         <span>{option.label}</span>
+  //       </div>
+  //     </Option>
+  //   );
+  // };
+
+  // const filterOption = (input, option) => {
+  //   return (option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0);
+  // };
+
+  const dropdownRender = (menu) => (
+    <div>
+      {menu}
+    </div>
+  );
 
   useEffect(() => {
     (async () => {
@@ -135,7 +155,7 @@ function Topbar() {
       style={{ background: "#008CFF" }}
       className={styles.header}
     >
-      <div className="" style={{ width: '100px' ,}}>
+      <div className="" style={{ width: '100px', }}>
         <img style={{ color: "#000000", fontSize: 50, height: 120, cursor: "pointer" }} src={logo} onClick={() => handleLink("/home")}></img>
       </div>
       <BarsOutlined className={styles.bars} onClick={showDrawer} />
@@ -154,24 +174,33 @@ function Topbar() {
         </NavLink>
         <Select
           showSearch
-          style={{ width: 270 }}
+          style={{ width: '550px' }}
           placeholder="Bạn tìm gì..."
           optionFilterProp="children"
-          filterOption={(input, option) => (option?.label ?? '').includes(input)}
-          filterSort={(optionA, optionB) =>
-            (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-          }
-          options={selectOptions}
+          filterOption={false}
+          defaultActiveFirstOption={false}
           onChange={handleSelectChange}
           onSearch={handleSearch}
-
-        />
+          dropdownRender={dropdownRender}
+          dropdownMatchSelectWidth={false}
+        >
+          {selectOptions.map((option) => (
+            <Select.Option key={option.value} value={option.value}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img style={{ width: '45px', height: '45px', borderRadius: '3px' }} src={option.image} alt={option.label} icon='shop' size='large' />
+                <div style={{ marginLeft: '8px' }}>
+                  {option.label}
+                </div>
+              </div>
+            </Select.Option>
+          ))}
+        </Select>
       </div>
       <div className={styles.logBtn}>
         <div style={{ position: 'relative', display: 'flex', float: 'right', alignItems: "center", cursor: 'pointer' }}>
           <Row>
             <Col onClick={() => handleLink("/cart")}>
-              <p style={{ marginRight: 30, padding: 0, margin: 0, color: '#FFFFFF' }}><ShoppingOutlined style={{ fontSize: '18px', color: '#FFFFFF' }} /> {cart} sản phẩm</p>
+              <p style={{ marginRight: 6, padding: 0, margin: 0, color: '#FFFFFF' }}><ShoppingOutlined style={{ fontSize: '18px', color: '#FFFFFF' }} /> {cart} sản phẩm</p>
             </Col>
             <Col>
               <Badge style={{ marginLeft: 10 }} overflowCount={9999} count={userData?.score > 0 ? userData?.score : 0} />
@@ -202,7 +231,7 @@ function Topbar() {
       </div>
       <Drawer title="Menu" placement="right" onClose={onClose} open={visibleDrawer}>
         <div className={styles.navmenu2}>
-          <NavLink className={styles.navlink2} to="/home" activeStyle>
+          {/* <NavLink className={styles.navlink2} to="/home" activeStyle>
             Trang chủ
           </NavLink>
           <NavLink className={styles.navlink2} to="/event" activeStyle>
@@ -213,7 +242,7 @@ function Topbar() {
           </NavLink>
           <NavLink className={styles.navlink2} to="/contact" activeStyle>
             Liên hệ
-          </NavLink>
+          </NavLink> */}
           <div className={styles.navlink2}>
             <div style={{ display: 'flex', cursor: 'pointer' }} onClick={() => handleLink("/cart")}>
               <p style={{ marginRight: 15, padding: 0, margin: 0, color: 'black' }}><ShoppingOutlined style={{ fontSize: '18px', color: 'black' }} /> {cart} sản phẩm</p>

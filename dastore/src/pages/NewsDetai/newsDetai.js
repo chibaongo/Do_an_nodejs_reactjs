@@ -16,54 +16,6 @@ const NewsDetai = () => {
     let history = useHistory();
     const { id } = useParams();
 
-    const onFinish = async (values) => {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        var date = yyyy + "-" + mm + "-" + dd;
-
-        try {
-            const formatData = {
-                "email": values.email,
-                "username": values.username,
-                "password": values.password,
-                "phone": values.phoneNo,
-                "role": "isClient",
-                "status": "actived"
-            }
-            await axiosClient.post("http://localhost:3100/api/auth/register", formatData)
-                .then(response => {
-                    console.log(response);
-                    if (response === "Email is exist") {
-                        return notification["error"]({
-                            message: "Thông báo",
-                            description: "Email đã tồn tại",
-
-                        });
-                    }
-                    if (response === undefined) {
-                        notification["error"]({
-                            message: "Thông báo",
-                            description: "Đăng ký thất bại",
-
-                        });
-                    }
-                    else {
-                        notification["success"]({
-                            message: "Thông báo",
-                            description: "Đăng kí thành công",
-                        });
-                        setTimeout(function () {
-                            history.push("/login");
-                        }, 1000);
-                    }
-                }
-                );
-        } catch (error) {
-            throw error;
-        }
-    }
 
     useEffect(() => {
         (async () => {
@@ -82,7 +34,7 @@ const NewsDetai = () => {
     return (
         <div class="pt-5 container">
             <div className="container">
-                <div dangerouslySetInnerHTML={{ __html: news.description }}></div>
+                <div className="news-details" dangerouslySetInnerHTML={{ __html: news.description }}></div>
             </div>
 
         </div>
