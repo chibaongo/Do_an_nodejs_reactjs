@@ -22,7 +22,6 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
-
 const { confirm } = Modal;
 const DATE_TIME_FORMAT = "DD/MM/YYYY HH:mm";
 const { Title } = Typography;
@@ -40,7 +39,21 @@ const DashBoard = () => {
     function NoData() {
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
     }
-
+    const formatDateTime = (dateTime) => {
+        const options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+        };
+        const formattedDateTime = new Date(dateTime).toLocaleString('vi', options);
+        return formattedDateTime;
+    };
+    const sortedOrder = [...order].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
     const columns = [
         {
             title: 'ID',
@@ -53,11 +66,17 @@ const DashBoard = () => {
             key: 'user',
             render: (text, record) => <a>{text.username}</a>,
         },
+        // {
+        //     title: 'Email',
+        //     dataIndex: 'user',
+        //     key: 'user',
+        //     render: (text, record) => <a>{text.email}</a>,
+        // },
         {
-            title: 'Email',
-            dataIndex: 'user',
-            key: 'user',
-            render: (text, record) => <a>{text.email}</a>,
+            title: 'Thời gian',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            render: (text) => <a>{formatDateTime(text)}</a>,
         },
         {
             title: 'Tổng tiền',
@@ -66,7 +85,7 @@ const DashBoard = () => {
             render: (text) => <a>{text.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</a>,
         },
         {
-            title: 'Hình thức thanh toán',
+            title: 'Hình thức',
             dataIndex: 'billing',
             key: 'billing',
         },
@@ -95,7 +114,7 @@ const DashBoard = () => {
                     setData(res.data.data);
                     setLoading(false);
                 });
-                await orderApi.getListOrder({ page: 1, limit: 6 }).then((res) => {
+                await orderApi.getListOrder({ page: 1, limit: 50 }).then((res) => {
                     console.log(res);
                     setTotalList(res.totalDocs)
                     setOrder(res.data.docs);
@@ -214,7 +233,7 @@ const DashBoard = () => {
                             <div className='chart'>
                                 <div className="title">Đơn hàng mới nhất</div>
                                 <div style={{ marginTop: 10 }}>
-                                    <Table columns={columns} pagination={{ position: ['bottomCenter'] }} dataSource={order} />
+                                    <Table columns={columns} pagination={{ position: ['bottomCenter'] }} dataSource={sortedOrder} />
                                 </div>
                             </div>
                         </Col>

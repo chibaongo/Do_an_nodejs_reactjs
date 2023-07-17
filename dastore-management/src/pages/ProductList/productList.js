@@ -482,7 +482,7 @@ const ProductList = () => {
                     setNewsList(res.data.docs);
                     setLoading(false);
                 });
-                
+
                 ;
             } catch (error) {
                 console.log('Failed to fetch event list:' + error);
