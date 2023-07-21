@@ -43,16 +43,16 @@ const orderController = {
             });
             const user = await UserModel.findById(req.body.userId);
             console.log(user);
-            const email = user.email;
-            const message = `<div style="background-color: #f2f2f2; padding: 20px;">
-            <h1 style="color: #007bff;">Xác nhận đơn hàng đặt thành công</h1>
-            <p style="font-size: 16px; color: #333;">Cảm ơn bạn đã sử dụng dịch của chúng tôi sau đây là 1 tóm tắt ngắng về đơn hàng</p>
-            <ul style="list-style: none; padding: 0;">
-                <li style="color: green;">Tổng đơn hàng:${req.body.orderTotal}</li>
-                <li style="color: red;">Địa chỉ nhận hàng:${req.body.address}</li>
-                <li style="color: blue;"Hình thức nhận hàng: COD</li>
-            </ul>
-        </div>`;
+        //     const email = user.email;
+        //     const message = `<div style="background-color: #f2f2f2; padding: 20px;">
+        //     <h1 style="color: #007bff;">Xác nhận đơn hàng đặt thành công</h1>
+        //     <p style="font-size: 16px; color: #333;">Cảm ơn bạn đã sử dụng dịch của chúng tôi sau đây là 1 tóm tắt ngắng về đơn hàng</p>
+        //     <ul style="list-style: none; padding: 0;">
+        //         <li style="color: green;">Tổng đơn hàng:${req.body.orderTotal}</li>
+        //         <li style="color: red;">Địa chỉ nhận hàng:${req.body.address}</li>
+        //         <li style="color: blue;"Hình thức nhận hàng: COD</li>
+        //     </ul>
+        // </div>`;
             // Gửi thông báo Kafka
             // await sendKafkaMessage(email, message);
 

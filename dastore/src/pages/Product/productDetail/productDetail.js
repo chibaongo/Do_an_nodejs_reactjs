@@ -236,8 +236,8 @@ const ProductDetail = () => {
                             </Col>
                             <Col span={8}>
                                 <Card className="card_total" bordered={false}>
-                                    <div className="price_product">{productDetail?.price?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</div>
-                                    <div className="promotion_product">{productDetail?.promotion?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</div>
+                                    <div className="price_product">  {numberWithCommas(productDetail.price - productDetail.promotion)} đ</div>
+                                    <div className="promotion_product">{productDetail?.price?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</div>
                                     <div class="box-product-promotion">
                                         <div class="box-product-promotion-header">
                                             <p>Khuyến mãi</p>
@@ -459,7 +459,7 @@ const ProductDetail = () => {
                                                                     // description={item?.comment}
                                                                     description={
                                                                         <div>
-                                                                            <p style={{ fontSize: '20', fontWeight: 'bold', fontFamily:'unset' }}>{item?.comment}</p>
+                                                                            <p style={{ fontSize: '20', fontWeight: 'bold', fontFamily: 'unset' }}>{item?.comment}</p>
                                                                             <div>{moment(item?.createdAt).format('DD-MM-YYYY HH:mm:ss')}</div>
                                                                         </div>
                                                                     }

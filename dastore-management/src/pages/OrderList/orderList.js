@@ -175,17 +175,18 @@ const OrderList = () => {
             render: (text, record, index) => index + 1,
         },
         {
+            title: 'Mã đơn hàng',
+            // dataIndex: '_',
+            key: '_id',
+            render: (text, record) => <a>{text._id}</a>,
+        },
+        {
             title: 'Tên',
             dataIndex: 'user',
             key: 'user',
             render: (text, record) => <a>{text.username}</a>,
         },
-        {
-            title: 'Email',
-            dataIndex: 'user',
-            key: 'user',
-            render: (text, record) => <a>{text.email}</a>,
-        },
+
         {
             title: 'Tổng tiền',
             dataIndex: 'orderTotal',

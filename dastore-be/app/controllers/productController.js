@@ -10,7 +10,7 @@ const calculateCosineSimilarity = (product1, product2) => {
     const vector1 = [product1.price, product1.quantity]; // Ví dụ: sử dụng giá và số lượng làm đặc trưng
     const vector2 = [product2.price, product2.quantity];
 
-    // Tính tổng tích của hai vector
+    // Tính tổng tích vo huong của hai vector
     let dotProduct = 0;
     for (let i = 0; i < vector1.length; i++) {
         dotProduct += vector1[i] * vector2[i];
@@ -127,14 +127,15 @@ const productController = {
           image,
           promotion,
           quantity,
+          color,
+          slide,
           suonXe,
           loaiPhanhThang,
           boLip,
           boDia,
           loaiTayDe,
           phuoc,
-          taiTrong,
-          color
+          taiTrong
         } = req.body;
       
         try {
@@ -144,18 +145,19 @@ const productController = {
               name,
               price,
               description,
-              quantity,
               category,
               image,
               promotion,
+              quantity,
+              color,
+              slide,
               suonXe,
               loaiPhanhThang,
               boLip,
               boDia,
               loaiTayDe,
               phuoc,
-              taiTrong,
-              color
+              taiTrong
             },
             { new: true }
           );

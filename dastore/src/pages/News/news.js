@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import axiosClient from "../../apis/axiosClient";
 import productApi from "../../apis/productApi";
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-
+import moment from 'moment';
 const { Search } = Input;
 
 const News = () => {
@@ -18,7 +18,10 @@ const News = () => {
     const onFinish = async (values) => {
         // ...
     }
-
+    const formatNewsTime = (createdAt) => {
+        const formattedTime = moment(createdAt).format('DD/MM/YYYY HH:mm'); // Định dạng thời gian theo mẫu 'DD/MM/YYYY HH:mm'
+        return formattedTime;
+    };
     useEffect(() => {
         (async () => {
             try {
@@ -44,8 +47,8 @@ const News = () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
         return doc.body.textContent || "";
-      };
-    
+    };
+
     return (
         <div className="pt-5 container" style={{ marginBottom: '100px' }}>
             <div className="news-list">
@@ -59,8 +62,9 @@ const News = () => {
                             >
                                 <div className="news-item-content">
                                     <div className="news-item-title">{item.name}</div>
+                                    <div className="news-item-time">{formatNewsTime(item.createdAt)}</div>
                                     <div className="news-item-description">
-                                        {parseHTML(item.description).substring(0, 50)} <p style={{ fontWeight:'bold' }}>xem thêm ...</p>
+                                        {parseHTML(item.description).substring(0, 50)} <p style={{ fontWeight: 'bold' }}>xem thêm ...</p>
                                     </div>
                                     <div className="news-item-image-container">
                                         <img src={item.image} alt="News Image" className="news-item-image" />

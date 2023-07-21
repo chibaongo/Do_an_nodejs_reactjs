@@ -62,13 +62,54 @@ const userController = {
         try {
             const user = await UserModel.findByIdAndUpdate(_id, { username, email, password, role, phone, status }, { new: true });
             if (!user) {
+                user.username = username;
+                user.phone = phone;
                 return res.status(404).json({ message: 'User not found' });
             }
-
             return res.status(200).json("Update success");
         } catch (err) {
             console.log(err);
             return res.status(500).json(err);
+        }
+    },
+    // updateUser: async (req, res) => {
+    //     const _id = req.params.id;
+    //     const { username, phone } = req.body;
+    //     try {
+    //         const user = await UserModel.findById(_id,);
+    //         if (!user) {
+    //             return res.status(404).json({ message: 'User not found' });
+    //         }
+    //         user.username = username;
+    //         user.phone = phone;
+    //         const updatedUser = await user.save();
+    //         return res.status(200).json({ updatedUser });
+    //     } catch (err) {
+    //         console.log(err);
+    //         return res.status(500).json(err);
+    //     }
+    // },
+
+    updatePassword: async (req, res) => {
+        const _id = req.params.id;
+        const { currentPassword, newPassword } = req.body;
+        try {
+            const user = await UserModel.findById(_id);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            const isMatch = await bcrypt.compare(currentPassword, user.password);
+            if (!isMatch) {
+                return res.status(401).json({ message: 'Mật khẩu hiện tại không đúng' });
+            }
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(newPassword, salt);
+            user.password = hashedPassword;
+            const updatePassword = await user.save();
+            return res.status(200).json(updatePassword);
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ message: 'Failed to update password' });
         }
     },
 

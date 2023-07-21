@@ -63,7 +63,7 @@ const RegisterCustomer = () => {
     }
     return (
         <div>
-            <div className="imageBackground">
+            <div className="login-page1">
                 <div id="wrapper">
                     <Card id="dialog" bordered={false} >
                         <Form

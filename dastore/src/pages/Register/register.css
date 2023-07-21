@@ -50,6 +50,17 @@
   height: 100%;
 }
 
+.login-page1 {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  background: url(https://bikevn.com/wp-content/uploads/2022/08/hinh-nen-min.png);
+  background-size: cover;
+}
+
+.text {
+  text-align: center;
+}
 
 .loginform {
   max-width: 500px;

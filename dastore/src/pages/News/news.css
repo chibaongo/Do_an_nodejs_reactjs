@@ -40,7 +40,7 @@
     font-size: 16px;
     font-weight: bold;
     font-family: Arial;
-    margin-bottom: 3px; /* Giảm khoảng cách dưới của tiêu đề tin tức */
+    margin-bottom: 1px; /* Giảm khoảng cách dưới của tiêu đề tin tức */
     color: #171717;
     text-align: left;
 
@@ -71,3 +71,9 @@
     color: #3f3f3f; 
     text-align: left;
 }
+.news-item-time {
+    text-align: right;
+    font-size: 12px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #3f3f3f; 
+  }

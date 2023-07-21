@@ -115,7 +115,13 @@ const Cart = () => {
             title: 'Giá',
             dataIndex: 'price',
             key: 'price',
-            render: (text) => <a>{text.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</a>,
+            render: (text, record) => (
+                <div>
+                    <div className='groupButton'>
+                        {(record.price - record.promotion).toLocaleString('vi', { style: 'currency', currency: 'VND' })}
+                    </div>
+                </div >
+            ),
         },
         {
             title: 'Số lượng',
@@ -148,7 +154,7 @@ const Cart = () => {
             render: (text, record) => (
                 <div>
                     <div className='groupButton'>
-                        {(record.price * record.quantity).toLocaleString('vi', { style: 'currency', currency: 'VND' })}
+                        {((record.price - record.promotion) * record.quantity).toLocaleString('vi', { style: 'currency', currency: 'VND' })}
                     </div>
                 </div >
             ),
@@ -194,14 +200,14 @@ const Cart = () => {
                         <div className="box_cart">
                             <Layout className="box_cart">
                                 <Content className='site-layout-background'>
-                                    <Breadcrumb>Đơn hàng</Breadcrumb>
+                                    <Breadcrumb>Giỏ hàng</Breadcrumb>
                                     <br></br>
                                     <Row justify='end'>
                                         <Col>
                                             <Button type='default' danger>
                                                 <DeleteOutlined />
                                                 &nbsp;
-                                                <span onClick={() => deleteCart()}>Xóa đơn hàng</span>
+                                                <span onClick={() => deleteCart()}>Xóa giỏ hàng</span>
                                             </Button>
                                         </Col>
                                     </Row>
@@ -226,7 +232,7 @@ const Cart = () => {
                                     <Row justify='end'>
                                         <Col>
                                             <Statistic
-                                                title='Tổng tiền (đã bao gồm thuế).'
+                                                title='Tổng tiền.'
                                                 value={`${Math.round(
                                                     cartTotal
                                                 ).toFixed(0)}`}

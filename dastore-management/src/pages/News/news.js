@@ -95,7 +95,7 @@ const NewsList = () => {
             const categoryList = {
                 "name": values.name,
                 "description": description,
-                "slug": values.slug
+                // "slug": values.slug
             }
             await axiosClient.put("/news/" + id, categoryList).then(response => {
                 if (response === undefined) {
@@ -190,10 +190,11 @@ const NewsList = () => {
                 setId(id);
                 form2.setFieldsValue({
                     name: response.data.name,
-                    slug: response.data.slug,
+                    // slug: response.data.slug,
                     description: response.data.description,
                 });
                 console.log(form2);
+                setDescription(response.data.description);
                 setLoading(false);
             } catch (error) {
                 throw error;
@@ -500,7 +501,7 @@ const NewsList = () => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your sender name!',
+                                    message: 'Vui lòng nhập tên tin tức',
                                 },
                             ]}
                             style={{ marginBottom: 10 }}

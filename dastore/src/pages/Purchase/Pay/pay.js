@@ -140,76 +140,76 @@ const Pay = () => {
 
     const handleModalConfirm = async () => {
         try {
-          const queryParams = new URLSearchParams(window.location.search);
-          const paymentId = queryParams.get('paymentId');
-          // const token = queryParams.get('token');
-          const PayerID = queryParams.get('PayerID');
-          const token = localStorage.getItem("session_paypal");
-          const description = localStorage.getItem("description");
-          const address = localStorage.getItem("address");
-      
-          // Gọi API executePayment để thực hiện thanh toán
-          const response = await axiosClient.get('/payment/executePayment', {
-            params: {
-              paymentId,
-              token,
-              PayerID,
-            },
-          });
-      
-          if (response) {
-            const local = localStorage.getItem("user");
-            const currentUser = JSON.parse(local);
-      
-            const formatData = {
-              "userId": currentUser.user._id,
-              "address": address,
-              "billing": "paypal",
-              "description": description,
-              "status": "pending",
-              "products": productDetail,
-              "orderTotal": orderTotal,
-            };
-      
-            console.log(formatData);
-            await axiosClient.post("/order", formatData).then((response) => {
-              console.log(response);
-              if (response == undefined) {
-                notification["error"]({
-                  message: `Thông báo`,
-                  description: 'Đặt hàng thất bại',
+            const queryParams = new URLSearchParams(window.location.search);
+            const paymentId = queryParams.get('paymentId');
+            // const token = queryParams.get('token');
+            const PayerID = queryParams.get('PayerID');
+            const token = localStorage.getItem("session_paypal");
+            const description = localStorage.getItem("description");
+            const address = localStorage.getItem("address");
+
+            // Gọi API executePayment để thực hiện thanh toán
+            const response = await axiosClient.get('/payment/executePayment', {
+                params: {
+                    paymentId,
+                    token,
+                    PayerID,
+                },
+            });
+
+            if (response) {
+                const local = localStorage.getItem("user");
+                const currentUser = JSON.parse(local);
+
+                const formatData = {
+                    "userId": currentUser.user._id,
+                    "address": address,
+                    "billing": "paypal",
+                    "description": description,
+                    "status": "pending",
+                    "products": productDetail,
+                    "orderTotal": orderTotal,
+                };
+
+                console.log(formatData);
+                await axiosClient.post("/order", formatData).then((response) => {
+                    console.log(response);
+                    if (response == undefined) {
+                        notification["error"]({
+                            message: `Thông báo`,
+                            description: 'Đặt hàng thất bại',
+                        });
+                    } else {
+                        notification["success"]({
+                            message: `Thông báo`,
+                            description: 'Đặt hàng thành công',
+                        });
+                        form.resetFields();
+                        history.push("/final-pay");
+                        localStorage.removeItem("cart");
+                        localStorage.removeItem("cartLength");
+                    }
                 });
-              } else {
                 notification["success"]({
-                  message: `Thông báo`,
-                  description: 'Đặt hàng thành công',
+                    message: `Thông báo`,
+                    description: 'Thanh toán thành công',
                 });
-                form.resetFields();
-                history.push("/final-pay");
-                localStorage.removeItem("cart");
-                localStorage.removeItem("cartLength");
-              }
-            });
-            notification["success"]({
-              message: `Thông báo`,
-              description: 'Thanh toán thành công',
-            });
-      
+
+                setShowModal(false);
+            } else {
+                notification["error"]({
+                    message: `Thông báo`,
+                    description: 'Thanh toán thất bại',
+                });
+            }
+
             setShowModal(false);
-          } else {
-            notification["error"]({
-              message: `Thông báo`,
-              description: 'Thanh toán thất bại',
-            });
-          }
-      
-          setShowModal(false);
         } catch (error) {
-          console.error('Error executing payment:', error);
-          // Xử lý lỗi
+            console.error('Error executing payment:', error);
+            // Xử lý lỗi
         }
-      };
-      
+    };
+
 
     const CancelPay = () => {
         form.resetFields();
@@ -308,15 +308,25 @@ const Pay = () => {
                                         name="name"
                                         label="Tên"
                                         hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập tên',
+                                            },
+                                            // { max: 20, message: 'Password maximum 20 characters.' },
+                                            // { min: 6, message: 'Password at least 6 characters.' },
+                                        ]
+                                        }
                                         style={{ marginBottom: 10 }}
                                     >
-                                        <Input disabled placeholder="Tên" />
+                                        <Input placeholder="Tên" />
                                     </Form.Item>
 
                                     <Form.Item
                                         name="email"
                                         label="Email"
                                         hasFeedback
+
                                         style={{ marginBottom: 10 }}
                                     >
                                         <Input disabled placeholder="Email" />
@@ -327,10 +337,20 @@ const Pay = () => {
                                         name="phone"
                                         label="Số điện thoại"
                                         hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Số điện thoại',
+                                            },
+                                            // { max: 20, message: 'Password maximum 20 characters.' },
+                                            // { min: 6, message: 'Password at least 6 characters.' },
+                                        ]
+                                        }
                                         style={{ marginBottom: 10 }}
-                                    >
 
-                                        <Input disabled placeholder="Số điện thoại" />
+                                    >
+                                        {/* disabled */}
+                                        <Input placeholder="Số điện thoại" />
                                     </Form.Item>
 
                                     <Form.Item

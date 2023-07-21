@@ -302,6 +302,8 @@ const ProductList = () => {
                     loaiTayDe: response.product.loaiTayDe,
                     phuoc: response.product.phuoc,
                     taiTrong: response.product.taiTrong,
+                    colors: response.product.color
+
                 });
                 console.log(form2);
                 setDescription(response.product.description);
@@ -916,7 +918,45 @@ const ProductList = () => {
                                 id="avatar" name="file"
                                 accept="image/png, image/jpeg" />
                         </Form.Item>
+                        <Form.Item
+                            name="colors"
+                            label="Màu sắc"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng chọn ít nhất một màu!',
+                                },
+                            ]}
+                            style={{ marginBottom: 10 }}
+                        >
+                            <Select
+                                mode="multiple"
+                                placeholder="Chọn màu"
+                            >
+                                {newsList.map((color) => (
+                                    <Select.Option key={color._id} value={color?.description}>
+                                        {color.name}
+                                    </Select.Option>
+                                ))}
+                            </Select>
+                        </Form.Item>
 
+                        <Form.Item
+                            name="images"
+                            label="Hình ảnh slide"
+                            style={{ marginBottom: 10 }}
+                        >
+                            <Upload
+                                name="images"
+                                listType="picture-card"
+                                showUploadList={true}
+                                beforeUpload={() => false}
+                                onChange={handleImageUpload}
+                                multiple
+                            >
+                                <Button icon={<UploadOutlined />}>Tải lên</Button>
+                            </Upload>
+                        </Form.Item>
                         <Form.Item
                             name="category"
                             label="Danh mục"

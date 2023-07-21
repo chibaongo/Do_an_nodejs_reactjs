@@ -95,6 +95,7 @@ const ProductList = () => {
         (async () => {
             try {
                 await productApi.getProductCategory(id).then((item) => {
+                 //   const reversedNews = item.data.docs.reverse(); // Sắp xếp ngược lại mảng tin tức
                     setProductDetail(item.data.docs);
                 });
                 const response = await productApi.getCategory({ limit: 50, page: 1 });

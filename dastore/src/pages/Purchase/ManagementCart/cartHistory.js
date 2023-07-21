@@ -37,7 +37,7 @@ const CartHistory = () => {
     const [openModalUpdate, setOpenModalUpdate] = useState(false);
     const [id, setId] = useState();
     const [form2] = Form.useForm();
-
+    const history = useHistory();
 
     const handleCategoryList = async () => {
         try {
@@ -75,9 +75,11 @@ const CartHistory = () => {
                             'hủy đơn hàng thành công',
                     });
                     setOpenModalUpdate(false);
+                    window.location.reload();
                     handleCategoryList();
+
                 }
-                window.location.reload();
+
             })
             setLoading(false);
 
@@ -85,6 +87,7 @@ const CartHistory = () => {
             throw error;
         }
     }
+
     const handleCancel = (type) => {
         if (type === "create") {
             setOpenModalCreate(true);
@@ -115,65 +118,26 @@ const CartHistory = () => {
                 setLoading(false);
 
             } catch (error) {
-                throw error;
+                console.log('Lỗi hệ thống' + error)
             }
         })();
     }
+    const handleViewOrder = (orderId) => {
+        ;
+        history.push(`/order-details/${orderId}`);
+    };
+
     const columns = [
         {
-            title: 'Sản phẩm',
-            dataIndex: 'products',
-            key: 'products',
-            render: (products) => (
-                <div>
-                    {products.map((item, index) => (
-                        <div key={index}>
-                            {item.product.name}
-                        </div>
-                    ))}
-                </div>
-            ),
+            title: 'Mã đơn hàng',
+            key: '_id',
+            render: (text, record) => <a>{text._id}</a>
         },
         {
-            title: 'Giá',
-            dataIndex: 'products',
-            key: 'products',
-            render: (products) => (
-                <div>
-                    {products.map((item, index) => (
-                        <div key={index}>
-                            {item.product.price.toLocaleString('vi', { style: 'currency', currency: 'VND' })}
-                        </div>
-                    ))}
-                </div>
-            ),
-        },
-        {
-            title: 'Số lượng',
-            dataIndex: 'products',
-            key: 'products',
-            render: (products) => (
-                <div>
-                    {products.map((item, index) => (
-                        <div key={index}>
-                            {item.quantity}
-                        </div>
-                    ))}
-                </div>
-            ),
-        },
-        {
-            title: 'Tổng đơn hàng',
+            title: 'Tổng tiền',
             dataIndex: 'orderTotal',
             key: 'orderTotal',
-            render: (products) => (
-                <div>{products.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</div>
-            ),
-        },
-        {
-            title: 'Địa chỉ',
-            dataIndex: 'address',
-            key: 'address',
+            render: (text) => <a>{text?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</a>,
         },
         {
             title: 'Hình thức thanh toán',
@@ -181,14 +145,19 @@ const CartHistory = () => {
             key: 'billing',
         },
         {
+            title: 'Địa chỉ',
+            dataIndex: 'address',
+            key: 'address',
+        },
+        {
             title: 'Trạng thái',
-            dataIndex: 'status',
             key: 'status',
+            dataIndex: 'status',
             render: (slugs) => (
                 <span >
-                    {slugs === "rejected" ? <Tag style={{ width: 90, textAlign: "center" }} color="red">Đã hủy</Tag> : slugs === "approved" ? <Tag style={{ width: 90, textAlign: "center" }} color="geekblue" key={slugs}>
+                    {slugs === "rejected" ? <Tag style={{ width: 95, textAlign: "center" }} color="red">Đã hủy</Tag> : slugs === "approved" ? <Tag style={{ width: 95, textAlign: "center" }} color="geekblue" key={slugs}>
                         Vận chuyển
-                    </Tag> : slugs === "final" ? <Tag color="green" style={{ width: 90, textAlign: "center" }}>Đã giao</Tag> : <Tag color="blue" style={{ width: 90, textAlign: "center" }}>Đợi xác nhận</Tag>}
+                    </Tag> : slugs === "final" ? <Tag color="green" style={{ width: 95, textAlign: "center" }}>Đã giao</Tag> : <Tag color="blue" style={{ width: 95, textAlign: "center" }}>Đợi xác nhận</Tag>}
                 </span>
             ),
         },
@@ -197,29 +166,23 @@ const CartHistory = () => {
             dataIndex: 'createdAt',
             key: 'createdAt',
             render: (createdAt) => (
-                <span>{moment(createdAt).format('DD/MM/YYYY HH:mm')}</span>
+                <span>{moment(createdAt).format('DD/MM/YYYY HH:mm:ss')}</span>
             ),
         },
         {
             title: 'Hành động',
             key: 'action',
             render: (text, record) => (
-                //   <Button type="danger" onClick={() => handleDeleteCategory(record._id)}>
-                //     Xóa
-                //   </Button>
-                //  
                 <div>
                     <Row>
                         <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-
-                            {/* <Button
+                            <Button
                                 size="small"
-                                
                                 style={{ width: 150, borderRadius: 15, height: 30 }}
-                                onClick={() => handleEditOrder(record._id)}
+                                onClick={() => handleViewOrder(record._id)}
                             >
-                                Chỉnh sửa
-                            </Button> */}
+                                Xem
+                            </Button>
                             <Popconfirm
                                 title="Bạn có chắc chắn hủy đơn hàng này?"
                                 onConfirm={() => handleEditOrder(record._id)}
@@ -228,19 +191,15 @@ const CartHistory = () => {
                             >
                                 <Button
                                     size="small"
-                                    //icon={<DeleteOutlined />}
                                     style={{ width: 150, borderRadius: 15, height: 30 }}
                                 >
-                                    hủy
+                                    Hủy
                                 </Button>
                             </Popconfirm>
 
                         </div>
                     </Row>
-
                 </div >
-
-
             ),
         },
     ];
@@ -250,6 +209,7 @@ const CartHistory = () => {
             try {
                 await productApi.getOrderByUser().then((item) => {
                     console.log(item);
+
                     setOrderList(item);
                 });
                 setLoading(false);
@@ -262,15 +222,15 @@ const CartHistory = () => {
     }, [])
 
     return (
-        <div>
+        <div className="container" style={{ marginBottom: 30 }}>
             <Spin spinning={false}>
                 <div className="container" style={{ marginBottom: 30 }}>
-                    <h1 style={{ fontSize: 25, marginTop: 25, paddingBottom: 25 }}>Quản lý đơn hàng</h1>
+                    <h1 style={{ fontSize: 25, marginTop: 25, paddingBottom: 30 }}>Quản lý đơn hàng</h1>
                     <Card >
                         <Table columns={columns} dataSource={orderList.data} rowKey='_id' pagination={{ position: ['bottomCenter'] }} />
                     </Card>
-
                 </div>
+
                 <div>
                     <Modal
                         title="Cập nhật đơn hàng"
@@ -326,10 +286,9 @@ const CartHistory = () => {
                             >
                                 <Input.TextArea rows={4} placeholder="Mô tả lý do " />
                             </Form.Item>
-                            <p>Khách hàng lưu ý </p>
-                            <p>khi đơn hàng đang chuẩn bị hoặc đang trên đường giao thì khách hàng không được tự ý hủy đơn hàng
-                                vì như vậy sẽ làm ảnh hưởng đến cửa hàng của chúng tôi xin các khách hàng lưu ý</p>
-                            <p>chúng tôi sẽ có biện pháp xử lý đối với những khách hàng không theo quy định của của hàng</p>
+                            <p style={{ color: 'red', fontWeight: 'bold' }}>* Khách hàng lưu ý </p>
+                            <p style={{ color: 'red', fontStyle: 'italic' }}>- khi đơn hàng đang chuẩn bị hoặc đang trên đường giao thì khách hàng không được tự ý hủy đơn hàng vì như vậy sẽ làm ảnh hưởng đến cửa hàng của chúng tôi xin các khách hàng lưu ý</p>
+                            <p style={{ color: 'red', fontStyle: 'italic' }}>- Chúng tôi sẽ có biện pháp xử lý đối với những khách hàng không theo quy định của của hàng.</p>
                         </Form>
                     </Modal>
                 </div>

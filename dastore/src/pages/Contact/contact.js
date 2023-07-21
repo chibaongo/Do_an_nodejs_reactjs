@@ -13,56 +13,56 @@ const Contact = () => {
     const [delivery, setDelivery] = useState([]);
     let history = useHistory();
 
-    const onFinish = async (values) => {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        var date = yyyy + "-" + mm + "-" + dd;
+    // const onFinish = async (values) => {
+    //     var today = new Date();
+    //     var dd = String(today.getDate()).padStart(2, '0');
+    //     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    //     var yyyy = today.getFullYear();
+    //     var date = yyyy + "-" + mm + "-" + dd;
 
-        try {
-            const formatData = {
-                "email": values.email,
-                "username": values.username,
-                "password": values.password,
-                "phone": values.phoneNo,
-                "role": "isClient",
-                "status": "actived"
-            }
-            await axiosClient.post("http://localhost:3100/api/auth/register", formatData)
-                .then(response => {
-                    console.log(response);
-                    if (response === "Email is exist") {
-                        return notification["error"]({
-                            message: "Thông báo",
-                            description: "Email đã tồn tại",
+    //     try {
+    //         const formatData = {
+    //             "email": values.email,
+    //             "username": values.username,
+    //             "password": values.password,
+    //             "phone": values.phoneNo,
+    //             "role": "isClient",
+    //             "status": "actived"
+    //         }
+    //         await axiosClient.post("http://localhost:3100/api/auth/register", formatData)
+    //             .then(response => {
+    //                 console.log(response);
+    //                 if (response === "Email is exist") {
+    //                     return notification["error"]({
+    //                         message: "Thông báo",
+    //                         description: "Email đã tồn tại",
 
-                        });
-                    }
-                    if (response === undefined) {
-                        notification["error"]({
-                            message: "Thông báo",
-                            description: "Đăng ký thất bại",
+    //                     });
+    //                 }
+    //                 if (response === undefined) {
+    //                     notification["error"]({
+    //                         message: "Thông báo",
+    //                         description: "Đăng ký thất bại",
 
-                        });
-                    }
-                    else {
-                        notification["success"]({
-                            message: "Thông báo",
-                            description: "Đăng kí thành công",
-                        });
-                        setTimeout(function () {
-                            history.push("/login");
-                        }, 1000);
-                    }
-                }
-                );
-        } catch (error) {
-            throw error;
-        }
-    }
+    //                     });
+    //                 }
+    //                 else {
+    //                     notification["success"]({
+    //                         message: "Thông báo",
+    //                         description: "Đăng kí thành công",
+    //                     });
+    //                     setTimeout(function () {
+    //                         history.push("/login");
+    //                     }, 1000);
+    //                 }
+    //             }
+    //             );
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
     return (
-        <div id="container" class="pt-5">
+        <div id="container " class="pt-5">
             <div id="carouselMultiItemExample" class="carousel slide carousel-dark text-center" data-mdb-ride="carousel">
                 <div class="carousel-inner py-4">
                     <div class="carousel-item active">
@@ -73,7 +73,7 @@ const Contact = () => {
                                         src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
                                     />
                                     <h5 class="mb-3">Ngô Chí Bảo</h5>
-                                    <p>Web Developer - Leader Team</p>
+                                    <p>Web Developer - Leader</p>
                                     <p class="text-muted">
                                         <i class="fas fa-quote-left pe-2"></i>
                                         61, Đường 77, phường Tân Quy, Quận 7, TP HCM

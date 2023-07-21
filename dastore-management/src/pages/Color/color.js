@@ -242,18 +242,29 @@ const Color = () => {
         //     render: (text) => <div className='box_detail_description' dangerouslySetInnerHTML={{ __html: text }}></div>
         // },
         {
+            title: 'Màu',
+            dataIndex: 'description',
+            key: 'description',
+            render: (text) => (
+                <div
+                    className="box_detail_description"
+                    style={{ backgroundColor: text, width: '30px', height: '30px' }}
+                ></div>
+            ),
+        },
+        {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
                 <div>
                     <Row>
-                        <Button
+                        {/* <Button
                             size="small"
                             icon={<EditOutlined />}
                             style={{ width: 150, borderRadius: 15, height: 30 }}
                             onClick={() => handleEditCategory(record._id)}
                         >{"Chỉnh sửa"}
-                        </Button>
+                        </Button> */}
                         <div
                             style={{ marginLeft: 10 }}>
                             <Popconfirm
@@ -298,7 +309,7 @@ const Color = () => {
         console.log(color.hex); // Mã màu HEX
         // Lưu mã màu vào state hoặc làm bất kỳ thao tác nào khác
         setColor(hex);
-      };
+    };
 
     return (
         <div>
@@ -404,7 +415,7 @@ const Color = () => {
                             ]}
                             style={{ marginBottom: 10 }}
                         >
-                            <ColorPicker onChange={handleColorChange}/>
+                            <ColorPicker onChange={handleColorChange} />
                         </Form.Item>
 
                         <Form.Item
@@ -481,7 +492,7 @@ const Color = () => {
                             ]}
                             style={{ marginBottom: 10 }}
                         >
-                            <ColorPicker value={color} onChange={setColor}/>
+                            <ColorPicker value={color} onChange={setColor} />
                         </Form.Item>
 
 
